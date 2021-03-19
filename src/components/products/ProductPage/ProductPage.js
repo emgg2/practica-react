@@ -1,31 +1,45 @@
 import React from 'react';
+import { getProducts } from '../../../api/products';
+import scopedStyles from './ProductPage.module.css';
+import './ProductPage.css';
+import Layout from '../../layout/Layout';
 
-import { getProducts } from '../../../api/products'
+
+console.log(scopedStyles);
 
 const ProductPage = () => {
 
     const [products, setProducts] = React.useState([]);
-    const items = products.map(product => (
-    <div class = "box" key={product.id}>       
-        <a href="./edit-product.html?id={product.id}" tag="Editar {product.name}">
-        <img src="{product.picture}" alt="{product.name}"></img>
-        <div>
-            <p className="tag">{product.tags}</p>
-            <p>{product.name}</p>
-            <p><b>{product.price}€</b></p>     
-            <p className="{product.classSale}">{product.sale}</p>
-        </div></a>
-    </div>
-    ));
-
-
-
+    
     React.useEffect(() => {
-        getProducts().then(response => {setProducts(response.data)});
+        getProducts().then(setProducts);
     },[]);
 
-    return (
-        items
+    const handleClick = () =>  {
+        console.log('Construyendo un enlace al detalle...');                
+    }
+
+    const items = products.map(product => (
+       
+        <div onClick= {handleClick} className = "box" key={product.id}>                   
+            <img src={product.picture} alt={product.name}></img>
+            <div>
+                <p className="tag">{product.tags}</p>
+                <p>{product.name}</p>
+                <p><b>{product.price}€</b></p>     
+                <p className={product.classSale}>{product.sale}</p>
+            </div>
+        </div>
+       
+    ));
+
+    return ( 
+        <Layout title="Product List">
+            
+                <div className={scopedStyles.content}> {items} </div>
+        
+        </Layout> 
+    
     );
 }
 

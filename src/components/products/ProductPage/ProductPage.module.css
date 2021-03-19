@@ -1,0 +1,15 @@
+    
+.content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+
+img {
+    width: 120px;
+    height: 140px;
+    min-width: 120px;
+    min-height: 140px;
+    background-color: lightgrey;
+  }
+  
