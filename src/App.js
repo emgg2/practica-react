@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import ProductPage from './components/products/ProductPage/ProductPage.js'
+import { ProductPage } from './components/products';
 import Button from './components/shared/Button';
 
 

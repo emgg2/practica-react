@@ -8,10 +8,12 @@ const Header = ({className, ...props}) => {
 
     return (
         <header className={classNames('header', classNames)} {...props}>
-            <nav className="header-nav">
+          {/* <Link to="/"> */}
                 <div className="header-logo">
                     <Icon width="32" height="32"/>
                 </div>
+                <nav className="header-nav">
+                     {/* </Link> */}
                 <Button
                     to="/google"
                     variant="primary"

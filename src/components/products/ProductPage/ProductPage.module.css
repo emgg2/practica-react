@@ -12,4 +12,9 @@ img {
     min-height: 140px;
     background-color: lightgrey;
   }
+
+.boxDetail {
+    background-color: lightgray;
+    text-align: left;
+}
   

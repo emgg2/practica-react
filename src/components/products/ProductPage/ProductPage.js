@@ -21,13 +21,20 @@ const ProductPage = () => {
 
     const items = products.map(product => (
        
-        <div onClick= {handleClick} className = "box" key={product.id}>                   
+        <div onClick= {handleClick} className = "boxProduct" key={product.id}>                   
             <img src={product.picture} alt={product.name}></img>
-            <div>
-                <p className="tag">{product.tags}</p>
-                <p>{product.name}</p>
-                <p><b>{product.price}€</b></p>     
-                <p className={product.classSale}>{product.sale}</p>
+            <div className={scopedStyles.boxDetail}>
+                <div className="productDetail">
+                    <p className="productPrice"><b>{product.price}€</b></p>
+                    <p className="productName">{product.name}</p>
+                </div>
+                <p className="productDescription">
+                    lorem ipsumaslkdfja sñlfdjka sñdfañsfdj asñfkjasñdlkfjasdfkj
+                </p>
+                <div className="productDetail">
+                    <p className="tag">{product.tags}</p>                            
+                    <p className={product.sale ? 'sale' : 'lookingFor'}>{product.sale? 'En venta': 'Se busca'}</p>
+                </div>
             </div>
         </div>
        
