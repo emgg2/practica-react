@@ -4,9 +4,6 @@ import scopedStyles from './ProductPage.module.css';
 import './ProductPage.css';
 import Layout from '../../layout/Layout';
 
-
-console.log(scopedStyles);
-
 const ProductPage = () => {
 
     const [products, setProducts] = React.useState([]);
