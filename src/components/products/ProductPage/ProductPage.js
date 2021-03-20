@@ -19,7 +19,9 @@ const ProductPage = () => {
         console.log('Construyendo un enlace al detalle...');                
     }
 
-    const items = products.map(product => (
+    const items = products.map(product =>{
+        debugger;
+     return (
        
         <div onClick= {handleClick} className = "boxProduct" key={product.id}>                   
             <img src={product.picture} alt={product.name}></img>
@@ -29,16 +31,16 @@ const ProductPage = () => {
                     <p className="productName">{product.name}</p>
                 </div>
                 <p className="productDescription">
-                    lorem ipsumaslkdfja sñlfdjka sñdfañsfdj asñfkjasñdlkfjasdfkj
+                    {product.description}
                 </p>
                 <div className="productDetail">
                     <p className="tag">{product.tags}</p>                            
-                    <p className={product.sale ? 'sale' : 'lookingFor'}>{product.sale? 'En venta': 'Se busca'}</p>
+                    <p className={product.sale === true ? 'sale' : 'lookingFor'}>{product.sale === true ? 'En venta': 'Se busca'}</p>
                 </div>
             </div>
         </div>
        
-    ));
+    )});
 
     return ( 
         <Layout title="Product List">

@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { ProductPage } from './components/products';
 import Button from './components/shared/Button';
+import LoginPage from './components/auth/LoginPage/LoginPage';
 
 
 function App() {
@@ -9,8 +10,8 @@ function App() {
     <div className="App">      
       
      
-     
-        <ProductPage />
+        <LoginPage />
+        {/* <ProductPage /> */}
        
      
     </div>
