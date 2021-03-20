@@ -5,12 +5,18 @@ import FormField from '../../shared/FormField';
 
 import './LoginForm.css';
 
-function LoginForm() {
+function LoginForm({onSubmit}) {
     const [credentials, setCredentials] = React.useState ({
         username: '',
         password: '',
         });
     
+const handleSubmit = event => {
+
+  event.preventDefault();
+  onSubmit(credentials);
+
+};
 
 const handleChange = event => { 
   setCredentials (oldCredentials => ({
@@ -21,7 +27,7 @@ const handleChange = event => {
 const {username, password} = credentials;   
 
 return (
-    <form className="loginForm" >
+    <form className="loginForm" onSubmit={handleSubmit} >
       <FormField
         type="text"
         name="username"
