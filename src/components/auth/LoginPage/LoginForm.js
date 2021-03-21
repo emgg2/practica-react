@@ -5,7 +5,7 @@ import FormField from '../../shared/FormField';
 
 import './LoginForm.css';
 
-function LoginForm({onSubmit}) {
+function LoginForm({ onSubmit, isLoading }) {
     const [credentials, setCredentials] = React.useState ({
         username: '',
         password: '',
@@ -48,7 +48,7 @@ return (
         type="submit"
         className="loginForm-submit"
         variant="primary"           
-        disabled={!credentials.username || !credentials.password}
+        disabled={isLoading || !credentials.username || !credentials.password}
       >
         Log in
       </Button>

@@ -5,7 +5,10 @@ import Button from '../shared/Button';
 import {ReactComponent as Icon } from '../../assets/twitter.svg';
 
 const Header = ({className, ...props}) => {
+    console.log(props)
 
+    const {isLogged, onLogout} = props;      
+     
     return (
         <header className={classNames('header', classNames)} {...props}>
           {/* <Link to="/"> */}
@@ -18,19 +21,16 @@ const Header = ({className, ...props}) => {
                     to="/google"
                     variant="primary"
                     className='header-button'>Google</Button>
-                {/* {loggedUserId ? (
+                {isLogged ? (
                     <Button
-                    onClick={() => logout().then(onLogout)}
-                    
+                    onClick={onLogout}                    
                     className='header-button'>Log out</Button>
-                ):
-                
+                ):                
                 (
                     <Button
-                    to="/login"                  
-                    
+                    to="/login"                                      
                     className='header-button'>Log in</Button>
-                )}   */}
+                )}  
             </nav>
 
         </header>

@@ -4,7 +4,7 @@ import scopedStyles from './ProductPage.module.css';
 import './ProductPage.css';
 import Layout from '../../layout/Layout';
 
-const ProductPage = () => {
+const ProductPage = (props) => {
 
     const [products, setProducts] = React.useState([]);
     
@@ -17,7 +17,7 @@ const ProductPage = () => {
     }
 
     const items = products.map(product =>{
-        debugger;
+        
      return (
        
         <div onClick= {handleClick} className = "boxProduct" key={product.id}>                   
@@ -40,7 +40,7 @@ const ProductPage = () => {
     )});
 
     return ( 
-        <Layout title="Product List">
+        <Layout title="Product List" {...props}>
             
                 <div className={scopedStyles.content}> {items} </div>
         
