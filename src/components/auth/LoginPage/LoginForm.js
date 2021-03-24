@@ -1,4 +1,5 @@
 import React from 'react';
+import pT from 'prop-types';
 
 import Button from '../../shared/Button';
 import FormField from '../../shared/FormField';
@@ -54,6 +55,15 @@ return (
       </Button>
     </form>
   );
+}
+
+LoginForm.propTypes = {
+  onSubmit : pT.func.isRequired,
+  isLoading: pT.bool
+}
+
+LoginForm.defaultProps = {
+  isLoading: false,
 }
 
 export default LoginForm;
