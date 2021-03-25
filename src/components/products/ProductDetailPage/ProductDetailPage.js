@@ -3,11 +3,11 @@ import './ProductDetailPage.css';
 import Layout from '../../layout/Layout';
 
 
-const ProductDetailPage = (props) => {
+const ProductDetailPage = () => {
 
         
     return ( 
-        <Layout title="Product Detail" {...props}>
+        <Layout title="Product Detail" >
             
                 <div > ProductDetailPage </div>
         

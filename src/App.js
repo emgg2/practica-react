@@ -20,16 +20,16 @@ function App() {
         <Route path="/login">
         <LoginPage onLogin={handleOnLogin}/>     
         </Route>   
-        <Route exact path="/">
+        <Route exact path="/" >
           <ProductPage isLogged={isLogged} onLogout={handleOnLogout} />
         </Route> 
-        <Route path="/product/:productId">
-           <ProductDetailPage></ProductDetailPage>
-        </Route> 
+        <Route path="/product/:productId" component={ProductDetailPage} />
+           
+        
         <Route path="/product">
            <NewProductPage></NewProductPage>
         </Route> 
-        <Route path="/404" component="NotFound" />
+        <Route path="/404" component={NotFound} />
 
         
         <Route>
