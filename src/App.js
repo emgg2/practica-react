@@ -6,6 +6,8 @@ import Button from './components/shared/Button';
 import LoginPage from './components/auth/LoginPage/LoginPage';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom';
 import { NotFound } from './components/shared';
+import NewProductPage from './components/products/NewProductPage/NewProductPage';
+import ProductDetailPage from './components/products/ProductDetailPage/ProductDetailPage';
 
 function App() {
   const [isLogged, setIsLogged] = React.useState(false);
@@ -15,8 +17,18 @@ function App() {
      <Router>
 
       <Switch>        
-        <Route path="/login" component="LoginPage" />
-        <Route exact path="/" component="ProductPage" />
+        <Route path="/login">
+        <LoginPage onLogin={handleOnLogin}/>     
+        </Route>   
+        <Route exact path="/">
+          <ProductPage isLogged={isLogged} onLogout={handleOnLogout} />
+        </Route> 
+        <Route path="/product/:productId">
+           <ProductDetailPage></ProductDetailPage>
+        </Route> 
+        <Route path="/product">
+           <NewProductPage></NewProductPage>
+        </Route> 
         <Route path="/404" component="NotFound" />
 
         
@@ -26,9 +38,7 @@ function App() {
          
 
       </Switch>       
-     <div className="App">     
-
-     <NotFound /> 
+     <div className="App">         
     
         {/* {isLogged ? (
           <ProductPage isLogged={isLogged} onLogout={handleOnLogout} />
