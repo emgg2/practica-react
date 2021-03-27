@@ -7,8 +7,8 @@ export const getProducts = () => {
     return  client.get(url);
 }
 
-export const getProductById = (id) => {
-    const url = `${productBaseUrl}/products/${id}`;
+export const getProductById = (productId) => {
+    const url = `${productBaseUrl}/products/${productId}`;
     return client.get(url);
 }
 

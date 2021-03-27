@@ -4,8 +4,9 @@ import scopedStyles from './ProductPage.module.css';
 import './ProductPage.css';
 import Layout from '../../layout/Layout';
 import Spinner from '../../shared/Spinner';
+import {Link} from 'react-router-dom';
 
-const ProductPage = ({ isLoading, error, isLogged, onLogout, onError, onLoading, ...props }) => {
+const ProductPage = ({ isLoading, error, isLogged, onLogout, onError, onLoading, history, ...props }) => {
     
     const [products, setProducts] = React.useState([]);
  
@@ -26,32 +27,35 @@ const ProductPage = ({ isLoading, error, isLogged, onLogout, onError, onLoading,
         
     },[]);
 
-    const handleClick = () =>  {
-        console.log('Construyendo un enlace al detalle...');                
+    const handleClick = (productId) =>  {
+        console.log('Construyendo un enlace al detalle...', productId);                
+        console.log(history)
+        
     }
     
 
     const items = products.map(product =>{
         
      return (
-       
-        <div onClick= {handleClick} className = "boxProduct" key={product.id}>                   
-            <img src={product.picture} alt={product.name}></img>
-            <div className={scopedStyles.boxDetail}>
-                <div className="productDetail">
-                    <p className="productPrice"><b>{product.price}€</b></p>
-                    <p className="productName">{product.name}</p>
-                </div>
-                <p className="productDescription">
-                    {product.description}
-                </p>
-                <div className="productDetail">
-                    <p className="tag">{product.tags}</p>                            
-                    <p className={product.sale === true ? 'sale' : 'lookingFor'}>{product.sale === true ? 'En venta': 'Se busca'}</p>
+
+        <Link to={`/product/${product.id}`}>            
+            <div onClick= {handleClick} className = "boxProduct" key={product.id}>                   
+                <img src={product.picture} alt={product.name}></img>
+                <div className={scopedStyles.boxDetail}>
+                    <div className="productDetail">
+                        <p className="productPrice"><b>{product.price}€</b></p>
+                        <p className="productName">{product.name}</p>
+                    </div>
+                    <p className="productDescription">
+                        {product.description}
+                    </p>
+                    <div className="productDetail">
+                        <p className="tag">{product.tags}</p>                            
+                        <p className={product.sale === true ? 'sale' : 'lookingFor'}>{product.sale === true ? 'En venta': 'Se busca'}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-       
+       </Link>
     )});
 
     return (

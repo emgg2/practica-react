@@ -23,8 +23,7 @@ function App() {
      <Router>
 
        <Switch>        
-       <PrivateRoute isLogged="isLogged" path="/product/:productId">
-         {routeProps => <ProductDetailPage {...routeProps} />}
+       <PrivateRoute isLogged="isLogged" path="/product/:productId" component={ProductDetailPage}>         
          </PrivateRoute>
         <Route path="/login">
          
@@ -38,13 +37,8 @@ function App() {
         }
         </Route>   
         <PrivateRoute isLogged={isLogged} exact path="/" >
-          {() => isLogged 
-            ? <ProductPage isLogged={isLogged} onLogout={handleOnLogout} />
-            : <Redirect to="/login"/> }
+           {({history}) => <ProductPage isLogged={isLogged} onLogout={handleOnLogout} history={history} />}
         </PrivateRoute> 
-        
-           
-        
         <PrivateRoute  isLogged={isLogged} path="/product" >
            <NewProductPage></NewProductPage>
         </PrivateRoute> 
