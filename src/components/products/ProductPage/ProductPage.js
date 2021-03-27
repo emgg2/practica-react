@@ -12,17 +12,14 @@ const ProductPage = ({ isLoading, error, isLogged, onLogout, onError, onLoading,
   
     React.useEffect(() => {
         async function getProductList () {
-        try {
-            onLoading(true);
-            const products = await getProducts();
-            setProducts(products);    
-        } catch (error) {
-        
-            onError(error);
-            
+        try {            
+           // onLoading(true);                       
+            setProducts( await getProducts());            
+        } catch (error) {        
+           // onError(error);            
         }finally
-        {
-            onLoading(false);
+        {            
+         //   onLoading(false);
         }
     }
     getProductList();
@@ -58,7 +55,7 @@ const ProductPage = ({ isLoading, error, isLogged, onLogout, onError, onLoading,
     )});
 
     return (
-        <Layout title="Product List" isLoading={isLoading} error={error} { ...props } >            
+        <Layout title="Product List" isLoading={isLoading} error={error} onLogout={onLogout} { ...props } >            
                 <div className={scopedStyles.content}> {items} </div>
                 
         

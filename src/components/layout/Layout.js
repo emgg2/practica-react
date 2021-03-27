@@ -4,14 +4,14 @@ import Header from './Header';
 import './Layout.css';
 
 
-function Layout ({children, title, isLoading, error, ...props }) {
+function Layout ({children, title, isLoading, error, onLogout, ...props }) {
 
     
 
     return (
         <div className ="layout">
 
-            <Header className ="layout-header bordered" {...props}/>
+            <Header className ="layout-header bordered"  onLogout={onLogout} {...props}/>
             
             {isLoading && <Spinner />}       
             <main className="layout-main bordered">

@@ -3,11 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import { ProductPage } from './components/products';
 import Button from './components/shared/Button';
-import LoginPage from './components/auth/LoginPage/LoginPage';
+import { LoginPage, PrivateRoute } from './components/auth/';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom';
 import { NotFound } from './components/shared';
 import NewProductPage from './components/products/NewProductPage/NewProductPage';
 import ProductDetailPage from './components/products/ProductDetailPage/ProductDetailPage';
+
 
 function App() {
   const [isLogged, setIsLogged] = React.useState(false);
@@ -17,26 +18,36 @@ function App() {
   const handleOnLogout = () => setIsLogged(false);
   const handleError = (error) => setError(error);
   const handleLoading = (value) => setIsLoading(value);
+
   return (
      <Router>
 
-      {/* <Switch>        
+       <Switch>        
+       <PrivateRoute isLogged="isLogged" path="/product/:productId">
+         {routeProps => <ProductDetailPage {...routeProps} />}
+         </PrivateRoute>
         <Route path="/login">
          
-             <LoginPage onLogin={handleOnLogin}/> 
-         
+        {({ history }) => <LoginPage
+           isLoading={isLoading}
+           error={error}
+           onError={handleError}
+           onLogin={handleOnLogin}
+           onLoading={handleLoading}
+           history={history} /> 
+        }
         </Route>   
-        <Route exact path="/" >
+        <PrivateRoute isLogged={isLogged} exact path="/" >
           {() => isLogged 
             ? <ProductPage isLogged={isLogged} onLogout={handleOnLogout} />
             : <Redirect to="/login"/> }
-        </Route> 
-        <Route path="/product/:productId" component={ProductDetailPage} />
+        </PrivateRoute> 
+        
            
         
-        <Route path="/product">
+        <PrivateRoute  isLogged={isLogged} path="/product" >
            <NewProductPage></NewProductPage>
-        </Route> 
+        </PrivateRoute> 
         <Route path="/404" component={NotFound} />
 
         
@@ -45,11 +56,11 @@ function App() {
         </Route>
          
 
-      </Switch>        */}
+      </Switch>        
       
      <div className="App">         
     
-         {isLogged ? (
+         {/* {isLogged ? (
           <ProductPage 
           isLoading={isLoading}
           error={error}
@@ -64,7 +75,9 @@ function App() {
            onError={handleError}
            onLogin={handleOnLogin}
            onLoading={handleLoading} /> 
-        )} 
+        )}  */}
+
+     
      
     </div>
     </Router>
