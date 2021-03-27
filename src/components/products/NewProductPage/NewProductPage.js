@@ -5,7 +5,7 @@ import Layout from '../../layout/Layout';
 const NewProductPage = (props) => {
     
         return ( 
-            <Layout title="Product Detail" {...props}>
+            <Layout title="New Product" {...props}>
                 
                     <div > NewProduct </div>
             

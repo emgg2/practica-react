@@ -5,10 +5,12 @@ import './Header.css';
 import Button from '../shared/Button';
 import {ReactComponent as Icon } from '../../assets/twitter.svg';
 
-const Header = ({className, ...props}) => {
-    console.log(props)
+const Header = ({ className, ...props }) => {
 
+    console.log("EVA-------------------")
+    console.log(props);
     const {isLogged, onLogout} = props;      
+    console.log("islogged", isLogged);
      
     return (
         <header className={classNames('header', classNames)} {...props}>

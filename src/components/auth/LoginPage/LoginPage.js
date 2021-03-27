@@ -2,22 +2,25 @@ import React from 'react';
 import LoginForm from './LoginForm';
 import { login } from '../../../api/auth';
 
-import './LoginPage.css';
 
-function LoginPage({ onLogin }) {
-  const [error, setError] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(false);
+import './LoginPage.css';
+import Spinner from '../../shared/Spinner';
+
+function LoginPage({ isLoading, error, onError, onLogin, onLoading }) {
+  
+  
   const handleSubmit = async credentials => {
     try
     {
-      setIsLoading(true);
+      onLoading(true);
       await login(credentials);
-      onLogin();      
+      onLogin(); 
+           
     }catch (error) {
-      setError(error)
+      onError(error);
     } finally
     {
-      setIsLoading(false);
+      onLoading(false);
     }   
   }
     
@@ -25,7 +28,7 @@ function LoginPage({ onLogin }) {
         <div className="loginPage">
           <h1 className="loginPage-title">Log in to Twitter</h1> 
           { error && <div className="loginPage-error">{error.message}</div> }
-          {/* {isLoading && <Spinner />}       */}
+          {isLoading && <Spinner />}       
           <LoginForm onSubmit={handleSubmit} isLoading={isLoading}/>
           
         </div>

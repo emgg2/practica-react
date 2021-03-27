@@ -11,17 +11,25 @@ import ProductDetailPage from './components/products/ProductDetailPage/ProductDe
 
 function App() {
   const [isLogged, setIsLogged] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false); 
+  const [error, setError] = React.useState(null);
   const handleOnLogin = () => setIsLogged(true);
   const handleOnLogout = () => setIsLogged(false);
+  const handleError = (error) => setError(error);
+  const handleLoading = (value) => setIsLoading(value);
   return (
      <Router>
 
-      <Switch>        
+      {/* <Switch>        
         <Route path="/login">
-        <LoginPage onLogin={handleOnLogin}/>     
+         
+             <LoginPage onLogin={handleOnLogin}/> 
+         
         </Route>   
         <Route exact path="/" >
-          <ProductPage isLogged={isLogged} onLogout={handleOnLogout} />
+          {() => isLogged 
+            ? <ProductPage isLogged={isLogged} onLogout={handleOnLogout} />
+            : <Redirect to="/login"/> }
         </Route> 
         <Route path="/product/:productId" component={ProductDetailPage} />
            
@@ -37,14 +45,26 @@ function App() {
         </Route>
          
 
-      </Switch>       
+      </Switch>        */}
+      
      <div className="App">         
     
-        {/* {isLogged ? (
-          <ProductPage isLogged={isLogged} onLogout={handleOnLogout} />
+         {isLogged ? (
+          <ProductPage 
+          isLoading={isLoading}
+          error={error}
+          isLogged={isLogged} 
+          onLogout={handleOnLogout}
+          onError={handleError}
+          onLoading={handleLoading} />
         ) : (
-          <LoginPage onLogin={handleOnLogin}/> 
-        )} */}
+          <LoginPage
+           isLoading={isLoading}
+           error={error}
+           onError={handleError}
+           onLogin={handleOnLogin}
+           onLoading={handleLoading} /> 
+        )} 
      
     </div>
     </Router>

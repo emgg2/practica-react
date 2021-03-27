@@ -3,18 +3,36 @@ import { getProducts } from '../../../api/products';
 import scopedStyles from './ProductPage.module.css';
 import './ProductPage.css';
 import Layout from '../../layout/Layout';
+import Spinner from '../../shared/Spinner';
 
-const ProductPage = (props) => {
-
-    const [products, setProducts] = React.useState([]);
+const ProductPage = ({ isLoading, error, isLogged, onLogout, onError, onLoading, ...props }) => {
     
+    const [products, setProducts] = React.useState([]);
+ 
+  
     React.useEffect(() => {
-        getProducts().then(setProducts);
+        async function getProductList () {
+        try {
+            onLoading(true);
+            const products = await getProducts();
+            setProducts(products);    
+        } catch (error) {
+        
+            onError(error);
+            
+        }finally
+        {
+            onLoading(false);
+        }
+    }
+    getProductList();
+        
     },[]);
 
     const handleClick = () =>  {
         console.log('Construyendo un enlace al detalle...');                
     }
+    
 
     const items = products.map(product =>{
         
@@ -39,10 +57,10 @@ const ProductPage = (props) => {
        
     )});
 
-    return ( 
-        <Layout title="Product List" {...props}>
-            
+    return (
+        <Layout title="Product List" isLoading={isLoading} error={error} { ...props } >            
                 <div className={scopedStyles.content}> {items} </div>
+                
         
         </Layout> 
     
