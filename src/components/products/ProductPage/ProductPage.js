@@ -6,9 +6,10 @@ import Layout from '../../layout/Layout';
 import Spinner from '../../shared/Spinner';
 import {Link} from 'react-router-dom';
 import ProductItem from './ProductItem';
+import pT from 'prop-types';
 
 
-const ProductPage = ({ isLoading, error, isLogged, onLogout, onError, onLoading, history, ...props }) => {
+const ProductPage = ({ isLogged, onLogout, history, ...props }) => {
     
     const [products, setProducts] = React.useState([]);
  
@@ -39,11 +40,16 @@ const ProductPage = ({ isLoading, error, isLogged, onLogout, onError, onLoading,
     )});
 
     return (
-        <Layout title="Product List" isLoading={isLoading} error={error} onLogout={onLogout} { ...props } >            
+        <Layout title="Product List" onLogout={onLogout} { ...props } >            
                 <div className={scopedStyles.content}> {items} </div>                
         </Layout> 
     
     );
 }
 
+//TODO: RELLENAR PROPTYPES
+
+ProductPage.propTypes = {
+
+}
 export default ProductPage;

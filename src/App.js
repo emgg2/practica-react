@@ -12,13 +12,11 @@ import ProductDetailPage from './components/products/ProductDetailPage/ProductDe
 
 function App() {
   const [isLogged, setIsLogged] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false); 
-  const [error, setError] = React.useState(null);
+  
   const handleOnLogin = () => setIsLogged(true);
   const handleOnLogout = () => setIsLogged(false);
-  const handleError = (error) => setError(error);
-  const handleLoading = (value) => setIsLoading(value);
-
+  
+  //TODO: REVISAR TODOS LOS TYPES
   return (
      <Router>
 
@@ -27,13 +25,11 @@ function App() {
          </PrivateRoute>
         <Route path="/login">
          
-        {({ history }) => <LoginPage
-           isLoading={isLoading}
-           error={error}
-           onError={handleError}
+        {({ history, location }) => <LoginPage
            onLogin={handleOnLogin}
-           onLoading={handleLoading}
-           history={history} /> 
+           history={history}
+           location={location}
+           /> 
         }
         </Route>   
         <PrivateRoute isLogged={isLogged} exact path="/" >

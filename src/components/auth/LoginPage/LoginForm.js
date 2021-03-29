@@ -2,7 +2,7 @@ import React from 'react';
 import pT from 'prop-types';
 
 import Button from '../../shared/Button';
-import FormField from '../../shared/FormField';
+import Input from '../../shared/Input';
 
 import './LoginForm.css';
 
@@ -29,7 +29,7 @@ const {username, password} = credentials;
 
 return (
     <form className="loginForm" onSubmit={handleSubmit} >
-      <FormField
+      <Input
         type="text"
         name="username"
         label="phone, email or username"
@@ -37,7 +37,7 @@ return (
         value={username}
         onChange={handleChange}
       />
-      <FormField
+      <Input
         type="password"
         name="password"
         label="password"

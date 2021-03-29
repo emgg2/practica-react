@@ -1,10 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import './FormField.css';
+import './Input.css';
 
 
-function FormField({ className, label, ...props }) {
+function Input({ className, label, ...props }) {
   return (
     <div
       className={classNames(
@@ -25,4 +25,4 @@ function FormField({ className, label, ...props }) {
   );
 }
 
-export default FormField;
+export default Input;
