@@ -4,6 +4,7 @@ import Input from '../../shared/Input';
 import makeAnimated from 'react-select/animated';
 import Select from 'react-select';
 import Button from '../../shared/Button'
+import File from '../../shared/File'
 
 const NewProductPage = ({ onSubmit, isLoading }) => {
         const [productData, setProductData] = React.useState ({
@@ -13,7 +14,6 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                 tags: [],
                 file: ''
         });
-
 
     
         const optionsItems = [
@@ -75,16 +75,18 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                    options={tagsOptions}
                 />
 
-                 
+                <File />   
                     
-                      <Button
-                        type="submit"
-                        className="loginForm-submit"
-                        variant="primary"           
-                        disabled={isLoading || !description || !price}
-                        >
-                        Publicar
-                        </Button>                   
+                <Button
+                type="submit"
+                className="loginForm-submit"
+                variant="primary"           
+                disabled={isLoading || !description || !price}
+                onSubmit={handleSubmit}
+                >
+                Publicar
+                </Button>  
+                           
                     
                 </form>
             </div>
