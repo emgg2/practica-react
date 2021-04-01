@@ -7,9 +7,10 @@ import Select from 'react-select';
 import Button from '../../shared/Button'
 import NewProductPageForm from './NewProductPageForm'
 import { createProduct } from '../../../api/products';
+import { Redirect } from 'react-router';
 
 
-const NewProductPage = ({ onSubmit, isLoading }) => {
+const NewProductPage = ({  history }) => {
         const [productData, setProductData] = React.useState ({
                 description: '',
                 price:'',
@@ -22,7 +23,8 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
         const handleSubmit = async productData => {
                 try 
                 {
-                        await createProduct(productData);
+                        await createProduct(productData);                
+                        history.push("/");
 
                 }catch (error) {
 

@@ -36,7 +36,7 @@ function App() {
            {({history}) => <ProductPage isLogged={isLogged} onLogout={handleOnLogout} history={history} />}
         </PrivateRoute> 
         <PrivateRoute  isLogged={isLogged} path="/product" >
-           <NewProductPage></NewProductPage>
+           {({history}) => <NewProductPage history="history"></NewProductPage>}
         </PrivateRoute> 
         <Route path="/404" component={NotFound} />
 

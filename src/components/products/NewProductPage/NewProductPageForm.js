@@ -23,37 +23,33 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                 name:'tags'
         });
 
-    
         const optionsItems = [
                 { value: true, label: 'En Venta' , name:'status'},
-                { value: false, label: 'Se Busca', name:'status' },                
+                { value: false, label: 'Se Busca', name:'status' },
               ];
-        
-        const tagsOptions2 = [
-                { value: 'chocolate', label: 'Chocolate' },
-                { value: 'strawberry', label: 'Strawberry' },
-                { value: 'vanilla', label: 'Vanilla' },
-        ];   
-        // React.useEffect (() => {
-        // async function getTagsList() {
-                // try{
-                        // 
-                // setTagsOptions(await getTags());
-                // 
-                // }catch (error) {
-                // } finally {
-                        // }
-                // }
-                // getTagsList();
-        // }, []);
-        
-        const handleSubmit = event => {                
+
+         React.useEffect (() => {
+         async function getTagsList() {
+                 try{
+
+                 setTagsOptions(await getTags());
+
+                 }catch (error) {
+                 } finally {
+                         }
+                 }
+                 getTagsList();
+         }, []);
+
+        const handleSubmit = event => {
+
                 event.preventDefault();
+                debugger;
                 onSubmit(productData);
         }
 
         const handleChange = event => {
-        
+
                 setProductData (oldProductData => ({
                         ...oldProductData,
                         [event.target.name]: event.target.value,
@@ -61,10 +57,28 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
         }
 
         const handleChangeSelect = event => {
-                
+                debugger;
                 setProductData (oldProductData => ({
                         ...oldProductData,
                         [event.name]: event.value,
+                }))
+        }
+
+        const handleChangeMultiSelect = event => {
+                debugger;
+                let tags = [];
+                let nameEle = "";
+
+
+                event.forEach(element => {
+                        tags.push(element.value);                   
+                        nameEle = element.name;
+                });              
+                
+                console.log(tags);
+                setProductData (oldProductData => ({
+                        ...oldProductData,
+                        [nameEle]: tags,
                 }))
         }
 
@@ -72,19 +86,19 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
 
         const {description, price} = productData;
 
-        return ( 
-            
-                
-                <div class="columns">
-                <div class="column is-two-thirds">
-                <h1 class="title">New Product</h1>
+        return (
+
+
+                <div className="columns">
+                <div className="column is-two-thirds">
+                <h1 className="title">New Product</h1>
                 <form onSubmit={handleSubmit}>
-        
+
                 <Input
                   type="text"
                   name="description"
                   label="Descripcion"
-                  className="loginForm-field"            
+                  className="loginForm-field"
                   value={description}
                   onChange={handleChange}
                 />
@@ -93,46 +107,46 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                   type="text"
                   name="price"
                   label="Precio"
-                  className="loginForm-field"            
+                  className="loginForm-field"
                   value={price}
                   onChange={handleChange}
-                />              
-                            
-                <Select 
+                />
+
+                <Select
                         name="estado"
-                        options={optionsItems} 
+                        options={optionsItems}
                         onChange={handleChangeSelect} />
-                <Select 
+                <Select
                    closeMenuOnSelect={false}
                    components={animatedComponents}
                    defaultValue={[tagsOptions[1],tagsOptions[1]]}
                    isMulti
                    name="tags"
-                   onChange={handleChangeSelect}
-                   options={tagsOptions2}
+                   onChange={handleChangeMultiSelect}
+                   options={tagsOptions}
                 />
 
-                <File name="picture" onChange={handleChange}/>   
-                    
+                <File name="picture" onChange={handleChange}/>
+
                 <Button
                 type="submit"
                 className="loginForm-submit"
-                variant="primary"           
+                variant="primary"
                 disabled={isLoading || !description || !price}
-                
+
                 >
                 Publicar
-                </Button>  
-                           
-                    
+                </Button>
+
+
                 </form>
             </div>
         </div>
-            
-        
-        
+
+
+
         );
-    
+
 }
 
 export default NewProductPage;

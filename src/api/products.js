@@ -37,3 +37,5 @@ export const getTags = () => {
     const url = `${productBaseUrl}/tags`;
     return  client.get(url);
 }
+
+export const uploadFile = () =>{}
