@@ -13,6 +13,7 @@ export const getProductById = (productId) => {
 }
 
 export const createProduct = product => {
+    
     const url = `${productBaseUrl}/products`;
     return client.post(url, product);
 }
@@ -30,4 +31,9 @@ export const deleteLike = likeId => {
 export const deleteProduct = productId => {
     const url = `${productBaseUrl}/products/${productId}`;
     return client.delete(url);
+}
+
+export const getTags = () => {
+    const url = `${productBaseUrl}/tags`;
+    return  client.get(url);
 }

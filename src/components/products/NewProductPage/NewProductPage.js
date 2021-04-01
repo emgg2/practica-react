@@ -6,6 +6,8 @@ import makeAnimated from 'react-select/animated';
 import Select from 'react-select';
 import Button from '../../shared/Button'
 import NewProductPageForm from './NewProductPageForm'
+import { createProduct } from '../../../api/products';
+
 
 const NewProductPage = ({ onSubmit, isLoading }) => {
         const [productData, setProductData] = React.useState ({
@@ -16,20 +18,18 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                 file: ''
         });
 
+   
+        const handleSubmit = async productData => {
+                try 
+                {
+                        await createProduct(productData);
 
-    
-        const optionsItems = [
-                { value: true, label: 'En Venta' },
-                { value: false, label: 'Se Busca' },                
-              ];
-        const tagsOptions = [
-                { value: 'lifestyle', label: 'Lifestyle' },
-                { value: 'mobile', label: 'mobile' },
-        ];
-        
-        const handleSubmit = event => {
-                event.preventDefault();
-                onSubmit(productData);
+                }catch (error) {
+
+                }finally{
+
+                }                
+                
         }
 
         const handleChange = event => {
@@ -45,7 +45,7 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
         return ( 
             <Layout title="New Product" onSubmit={handleSubmit}>
                 
-                <NewProductPageForm></NewProductPageForm>
+                <NewProductPageForm onSubmit={handleSubmit}></NewProductPageForm>
             </Layout> 
         
         );

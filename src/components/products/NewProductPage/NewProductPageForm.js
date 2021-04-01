@@ -3,8 +3,11 @@ import './NewProductPage.css';
 import Input from '../../shared/Input';
 import makeAnimated from 'react-select/animated';
 import Select from 'react-select';
-import Button from '../../shared/Button'
-import File from '../../shared/File'
+import Button from '../../shared/Button';
+import File from '../../shared/File';
+import { getTags } from '../../../api/tags';
+import { createProduct } from '../../../api/products';
+
 
 const NewProductPage = ({ onSubmit, isLoading }) => {
         const [productData, setProductData] = React.useState ({
@@ -14,28 +17,57 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                 tags: [],
                 file: ''
         });
+        const [tagsOptions, setTagsOptions] = React.useState({
+                value: '',
+                label: '',
+                name:'tags'
+        });
 
     
         const optionsItems = [
-                { value: true, label: 'En Venta' },
-                { value: false, label: 'Se Busca' },                
+                { value: true, label: 'En Venta' , name:'status'},
+                { value: false, label: 'Se Busca', name:'status' },                
               ];
-        const tagsOptions = [
-                { value: 'lifestyle', label: 'Lifestyle' },
-                { value: 'mobile', label: 'mobile' },
-        ];
         
-        const handleSubmit = event => {
+        const tagsOptions2 = [
+                { value: 'chocolate', label: 'Chocolate' },
+                { value: 'strawberry', label: 'Strawberry' },
+                { value: 'vanilla', label: 'Vanilla' },
+        ];   
+        // React.useEffect (() => {
+        // async function getTagsList() {
+                // try{
+                        // 
+                // setTagsOptions(await getTags());
+                // 
+                // }catch (error) {
+                // } finally {
+                        // }
+                // }
+                // getTagsList();
+        // }, []);
+        
+        const handleSubmit = event => {                
                 event.preventDefault();
                 onSubmit(productData);
         }
 
         const handleChange = event => {
+        
                 setProductData (oldProductData => ({
                         ...oldProductData,
                         [event.target.name]: event.target.value,
                 }))
         }
+
+        const handleChangeSelect = event => {
+                
+                setProductData (oldProductData => ({
+                        ...oldProductData,
+                        [event.name]: event.value,
+                }))
+        }
+
         const animatedComponents = makeAnimated();
 
         const {description, price} = productData;
@@ -46,7 +78,7 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                 <div class="columns">
                 <div class="column is-two-thirds">
                 <h1 class="title">New Product</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
         
                 <Input
                   type="text"
@@ -66,23 +98,28 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                   onChange={handleChange}
                 />              
                             
-                <Select options={optionsItems} />
+                <Select 
+                        name="estado"
+                        options={optionsItems} 
+                        onChange={handleChangeSelect} />
                 <Select 
                    closeMenuOnSelect={false}
                    components={animatedComponents}
                    defaultValue={[tagsOptions[1],tagsOptions[1]]}
                    isMulti
-                   options={tagsOptions}
+                   name="tags"
+                   onChange={handleChangeSelect}
+                   options={tagsOptions2}
                 />
 
-                <File />   
+                <File name="picture" onChange={handleChange}/>   
                     
                 <Button
                 type="submit"
                 className="loginForm-submit"
                 variant="primary"           
                 disabled={isLoading || !description || !price}
-                onSubmit={handleSubmit}
+                
                 >
                 Publicar
                 </Button>  
