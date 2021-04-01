@@ -27,17 +27,17 @@ function LoginPage({ onLogin,  history, location }) {
   });
 
 
-  const handleSubmit = async credentials => {
+  const handleSubmit = async (credentials, savePassword)=> {
+    
     try
     {
       handleLoading(true);
-      await login(credentials);   
-    
-      isLogged.current = true;      
+
+      await login(credentials, savePassword);       
+      isLogged.current = true;  
            
-    }catch (error) {
-      handleError(error);
-      
+    }catch (error) { 
+      handleError(error.data);      
     } finally
     {
       handleLoading(false);
@@ -50,7 +50,7 @@ function LoginPage({ onLogin,  history, location }) {
            {isLoading && <Spinner />}  
           
           <h1 className="loginPage-title">Log in to Twitter</h1> 
-          { error && <Advert  /> }
+          { error && <Advert  message={error} /> }
              
           <LoginForm onSubmit={handleSubmit} isLoading={isLoading}/>
          

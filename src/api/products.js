@@ -1,9 +1,9 @@
 import client from './client';
 
-const productBaseUrl = '/api';
+const productBaseUrl = '/v1';
 
 export const getProducts = () => {
-    const url = `${productBaseUrl}/products`;
+    const url = `${productBaseUrl}/adverts`;
     return  client.get(url);
 }
 

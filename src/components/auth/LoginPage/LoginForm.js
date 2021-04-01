@@ -5,17 +5,19 @@ import Button from '../../shared/Button';
 import Input from '../../shared/Input';
 
 import './LoginForm.css';
+import Checkbox from '../../shared/Checkbox';
 
 function LoginForm({ onSubmit, isLoading }) {
     const [credentials, setCredentials] = React.useState ({
-        username: '',
+        email: '',
         password: '',
         });
+    const [savePassword, setSavePassword] = React.useState(false);
     
 const handleSubmit = event => {
 
   event.preventDefault();
-  onSubmit(credentials);
+  onSubmit(credentials,savePassword);
 
 };
 
@@ -25,31 +27,46 @@ const handleChange = event => {
     [event.target.name]: event.target.value,
   }));
 }     
-const {username, password} = credentials;   
+
+const handleSavePassword= event => {
+  
+  setSavePassword(!savePassword);
+  
+}
+const {email, password} = credentials;   
 
 return (
     <form className="loginForm" onSubmit={handleSubmit} >
       <Input
         type="text"
-        name="username"
-        label="phone, email or username"
+        name="email"
+        label="Email"
         className="loginForm-field"            
-        value={username}
+        value={email}
         onChange={handleChange}
       />
       <Input
         type="password"
         name="password"
-        label="password"
+        label="Password"
         className="loginForm-field" 
         value={password}           
         onChange={handleChange}
       />
+      <Checkbox 
+        value="Guardar password"
+        name="Guardar Password"
+        onChange={handleSavePassword}
+        checked={savePassword ? true: false }
+        label="Guardar Password" />
+          
+        
+      
       <Button
         type="submit"
         className="loginForm-submit"
         variant="primary"           
-        disabled={isLoading || !credentials.username || !credentials.password}
+        disabled={isLoading || !credentials.email || !credentials.password}
       >
         Log in
       </Button>

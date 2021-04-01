@@ -44,7 +44,6 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
         const handleSubmit = event => {
 
                 event.preventDefault();
-                debugger;
                 onSubmit(productData);
         }
 
@@ -56,8 +55,7 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                 }))
         }
 
-        const handleChangeSelect = event => {
-                debugger;
+        const handleChangeSelect = event => {                
                 setProductData (oldProductData => ({
                         ...oldProductData,
                         [event.name]: event.value,
@@ -65,7 +63,7 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
         }
 
         const handleChangeMultiSelect = event => {
-                debugger;
+                
                 let tags = [];
                 let nameEle = "";
 

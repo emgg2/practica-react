@@ -3,7 +3,7 @@ import scopedStyles from './ProductPage.module.css';
 const ProductItem = ({product}) => {
     return (
         <div className = "boxProduct" key={product.id}>                   
-        <img src={product.picture} alt={product.name}></img>
+        <img src={`${process.env.REACT_APP_API_BASE_URL}/${product.photo}`} alt={product.name}></img>
         <div className={scopedStyles.boxDetail}>
             <div className="productDetail">
                 <p className="productPrice"><b>{product.price}€</b></p>

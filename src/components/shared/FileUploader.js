@@ -1,14 +1,14 @@
 import React , {useRef} from 'react'
 
-const FileUploader = () => {
+const FileUploader = ({onFileSelect}) => {
     const fileInput = useRef(null);
 
     const handleFileInput = (e) => {
         const file = e.target.files[0];
-        if(file.size > 1024)
-            onFileSelectError ({error: "file size cannot exceed more than 1MB"});
-        else 
-            onFileSelectSuccess(file);
+        //if(file.size > 1024)
+         //   onFileSelectError ({error: "file size cannot exceed more than 1MB"});
+        //else 
+        //    onFileSelectSuccess(file);
     }
 
     return(

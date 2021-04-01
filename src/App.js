@@ -8,14 +8,19 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-rou
 import { NotFound } from './components/shared';
 import NewProductPage from './components/products/NewProductPage/NewProductPage';
 import ProductDetailPage from './components/products/ProductDetailPage/ProductDetailPage';
+import { logout } from './api/auth';
 
 
 function App() {
   const [isLogged, setIsLogged] = React.useState(false);
   
   const handleOnLogin = () => setIsLogged(true);
-  const handleOnLogout = () => setIsLogged(false);
-  
+  const handleOnLogout = () => {
+    setIsLogged(false);
+    logout();    
+  }
+    
+
   //TODO: REVISAR TODOS LOS TYPES
   return (
      <Router>
