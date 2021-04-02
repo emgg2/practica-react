@@ -14,7 +14,7 @@ class ProductDetailPage extends React.Component  {
     }
 
     componentDidMount(){
-        const {match} = this.props;
+        const {match} = this.props;        
         getProductById(match.params.productId).then(product => this.setState({product})).catch(error => this.setState({error}));   
     }
 

@@ -43,6 +43,7 @@ return (
         label="Email"
         className="loginForm-field"            
         value={email}
+        autoFocus
         onChange={handleChange}
       />
       <Input

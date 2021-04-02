@@ -1,6 +1,8 @@
 import React from 'react';
 import LoginForm from './LoginForm';
 import { login } from '../../../api/auth';
+import { AuthContextConsumer } from '../context';
+import pT from 'prop-types';
 
 
 import './LoginPage.css';
@@ -9,10 +11,11 @@ import Advert from '../../shared/Advert';
 
 //TODO: REHACER ERROR Y SPINNER PARA USAR CUSTOM HOOK, O SINO EN CADA COMPONENTE POR SEPARADO NO ES OBLIGATORIO
 
-function LoginPage({ onLogin,  history, location }) {
+function LoginPage({ onLogin, history, location }) {
   const [isLoading, setIsLoading] = React.useState(false); 
   const [error, setError] = React.useState(null);
 
+  
   const handleError = (error) => setError(error);
   const handleLoading = (value) => setIsLoading(value);
   
@@ -58,6 +61,18 @@ function LoginPage({ onLogin,  history, location }) {
         </div>
       );
 }
+
+LoginPage.protTypes = {
+  onLogin: pT.func.isRequired,
+  history: pT.shape({ replace: pT.func.isRequired }).isRequired,
+  location: pT.object.isRequired
+}
+
+const ConnectedLoginPage = props => (
+  <AuthContextConsumer>
+    {value => <LoginPage {...value} {...props} />}
+  </AuthContextConsumer>
+);
     
-export default LoginPage;
+export default ConnectedLoginPage;
     

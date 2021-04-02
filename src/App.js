@@ -13,13 +13,19 @@ import { AuthContextProvider } from './components/auth/context'
 
 
 function App({isInitiallyLogged}) {
+
   const [isLogged, setIsLogged] = React.useState(isInitiallyLogged);
   
+  const ref = React.useRef(null);
   const handleOnLogin = () => setIsLogged(true);
   const handleOnLogout = () => {
     setIsLogged(false);
     logout();    
   }
+
+  React.useEffect(() => {
+	console.log(ref.current);
+  }, []);
 
   const authValue = {
     isLogged,
@@ -33,30 +39,12 @@ function App({isInitiallyLogged}) {
     <div className="App">  
     <AuthContextProvider value={authValue}>
       <Switch>        
-        <PrivateRoute isLogged="isLogged" path="/product/:productId" component={ProductDetailPage} />                  
-        <PrivateRoute  isLogged={isLogged} path="/product" >
-          	{({history}) => 
-			  	<NewProductPage 
-				  	history="history" 
-				/>
-			}
-        </PrivateRoute> 
-        <Route path="/login">         
-          	{({ history, location }) => 
-		  		<LoginPage
-					onLogin={handleOnLogin}
-					history={history}
-					location={location}
-            	/> 
-        	}
-        </Route>   
-        <PrivateRoute isLogged={isLogged} exact path="/" >
-          	{({history}) => 
-			  	<ProductPage 
-				  	history={history} 
-				/>
-			}
-        </PrivateRoute> 
+        <PrivateRoute path="/product/:productId">
+			{routeProps => <ProductDetailPage ref={ref} {...routeProps} />}	
+		</PrivateRoute> 
+        <PrivateRoute path="/product" component={NewProductPage} />       	
+        <Route path="/login" component={LoginPage} />            	
+        <PrivateRoute exact path="/" component={ProductPage} />          	
         <Route path="/404" component={NotFound} />        
         <Route>
           <Redirect to="/404" />

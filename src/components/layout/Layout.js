@@ -27,7 +27,6 @@ function Layout ({children, title, ...props }) {
         </div>
 
     );
-
 }
 
 export default Layout;
