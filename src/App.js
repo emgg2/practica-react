@@ -9,73 +9,61 @@ import { NotFound } from './components/shared';
 import NewProductPage from './components/products/NewProductPage/NewProductPage';
 import ProductDetailPage from './components/products/ProductDetailPage/ProductDetailPage';
 import { logout } from './api/auth';
+import { AuthContextProvider } from './components/auth/context'
 
 
-function App() {
-  const [isLogged, setIsLogged] = React.useState(false);
+function App({isInitiallyLogged}) {
+  const [isLogged, setIsLogged] = React.useState(isInitiallyLogged);
   
   const handleOnLogin = () => setIsLogged(true);
   const handleOnLogout = () => {
     setIsLogged(false);
     logout();    
   }
+
+  const authValue = {
+    isLogged,
+    onLogout: handleOnLogout,
+    onLogin: handleOnLogin,
+  }
     
 
   //TODO: REVISAR TODOS LOS TYPES
-  return (
-     <Router>
-
-       <Switch>        
-       <PrivateRoute isLogged="isLogged" path="/product/:productId" component={ProductDetailPage}>         
-         </PrivateRoute>
-        <Route path="/login">
-         
-        {({ history, location }) => <LoginPage
-           onLogin={handleOnLogin}
-           history={history}
-           location={location}
-           /> 
-        }
+  return (        
+    <div className="App">  
+    <AuthContextProvider value={authValue}>
+      <Switch>        
+        <PrivateRoute isLogged="isLogged" path="/product/:productId" component={ProductDetailPage} />                  
+        <PrivateRoute  isLogged={isLogged} path="/product" >
+          	{({history}) => 
+			  	<NewProductPage 
+				  	history="history" 
+				/>
+			}
+        </PrivateRoute> 
+        <Route path="/login">         
+          	{({ history, location }) => 
+		  		<LoginPage
+					onLogin={handleOnLogin}
+					history={history}
+					location={location}
+            	/> 
+        	}
         </Route>   
         <PrivateRoute isLogged={isLogged} exact path="/" >
-           {({history}) => <ProductPage isLogged={isLogged} onLogout={handleOnLogout} history={history} />}
+          	{({history}) => 
+			  	<ProductPage 
+				  	history={history} 
+				/>
+			}
         </PrivateRoute> 
-        <PrivateRoute  isLogged={isLogged} path="/product" >
-           {({history}) => <NewProductPage history="history"></NewProductPage>}
-        </PrivateRoute> 
-        <Route path="/404" component={NotFound} />
-
-        
+        <Route path="/404" component={NotFound} />        
         <Route>
           <Redirect to="/404" />
         </Route>
-         
-
       </Switch>        
-      
-     <div className="App">         
-    
-         {/* {isLogged ? (
-          <ProductPage 
-          isLoading={isLoading}
-          error={error}
-          isLogged={isLogged} 
-          onLogout={handleOnLogout}
-          onError={handleError}
-          onLoading={handleLoading} />
-        ) : (
-          <LoginPage
-           isLoading={isLoading}
-           error={error}
-           onError={handleError}
-           onLogin={handleOnLogin}
-           onLoading={handleLoading} /> 
-        )}  */}
-
-     
-     
+      </AuthContextProvider>  
     </div>
-    </Router>
   );
 }
 

@@ -4,8 +4,9 @@ import {Link} from 'react-router-dom';
 import './Header.css';
 import Button from '../shared/Button';
 import {ReactComponent as Icon } from '../../assets/twitter.svg';
+import AuthButton from '../auth/AuthButton/';
 
-const Header = ({ className, onLogout, ...props }) => {
+const Header = ({ className, ...props }) => {
      
     return (
         <header className={classNames('header', classNames)} {...props}>
@@ -21,10 +22,8 @@ const Header = ({ className, onLogout, ...props }) => {
                     to="/google"
                     variant="primary"
                     className='header-button'>Product</Button>
-                </Link>
-                <Button
-                    onClick={onLogout}                    
-                    className='header-button'>Log out</Button>
+                </Link>                
+                <AuthButton className="header-button" />
             </nav>
 
         </header>

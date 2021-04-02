@@ -6,7 +6,7 @@ import './Layout.css';
 
 //TODO: tratamiento de error y spinner, hacerlo con un custom hook 
 
-function Layout ({children, title, onLogout, ...props }) {
+function Layout ({children, title, ...props }) {
 //     const [isLoading, setIsLoading] = React.useState(false); 
 //     const [error, setError] = React.useState(null);
 //     const handleError = (error) => setError(error);
@@ -15,7 +15,7 @@ function Layout ({children, title, onLogout, ...props }) {
     return (
         <div className ="layout">
 
-            <Header className ="layout-header bordered"  onLogout={onLogout} {...props}/>
+            <Header className ="layout-header bordered" {...props}/>
             
             {/* {isLoading && <Spinner />}        */}
             <main className="layout-main bordered">

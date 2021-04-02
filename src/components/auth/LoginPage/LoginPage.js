@@ -49,7 +49,7 @@ function LoginPage({ onLogin,  history, location }) {
         <div className="loginPage">
            {isLoading && <Spinner />}  
           
-          <h1 className="loginPage-title">Log in to Twitter</h1> 
+          <h1 className="loginPage-title">Nodepop Log in</h1> 
           { error && <Advert  message={error} /> }
              
           <LoginForm onSubmit={handleSubmit} isLoading={isLoading}/>

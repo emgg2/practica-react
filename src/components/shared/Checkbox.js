@@ -4,7 +4,7 @@ const Checkbox = ({label, ...props}) => {
     return(
       <div>
       <input type="checkbox" {...props} />
-      <label >{label}</label>
+      <label > {label} </label>
       </div>
     );
 };

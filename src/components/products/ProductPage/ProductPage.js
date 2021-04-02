@@ -40,7 +40,7 @@ const ProductPage = ({ isLogged, onLogout, history, ...props }) => {
     )});
 
     return (
-        <Layout title="Product List" onLogout={onLogout} { ...props } >            
+        <Layout title="Product List" { ...props } >            
                 <div className={scopedStyles.content}> {items} </div>                
         </Layout> 
     
