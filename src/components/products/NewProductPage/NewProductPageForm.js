@@ -9,13 +9,13 @@ import { getTags } from '../../../api/tags';
 import { createProduct } from '../../../api/products';
 
 
-const NewProductPage = ({ onSubmit, isLoading }) => {
+const NewProductPage = ({ onSubmit }) => {
         const [productData, setProductData] = React.useState ({
-                description: '',
+                name: '',
                 price:'',
-                status: '',
+                sale: '',
                 tags: [],
-                file: ''
+                photo: ''
         });
         const [tagsOptions, setTagsOptions] = React.useState({
                 value: '',
@@ -24,16 +24,14 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
         });
 
         const optionsItems = [
-                { value: true, label: 'En Venta' , name:'status'},
-                { value: false, label: 'Se Busca', name:'status' },
+                { value: true, label: 'En Venta' , name:'sale'},
+                { value: false, label: 'Se Busca', name:'sale' },
               ];
 
          React.useEffect (() => {
          async function getTagsList() {
                  try{
-
-                 setTagsOptions(await getTags());
-
+                 		setTagsOptions(getTagsValue(await getTags()));
                  }catch (error) {
                  } finally {
                          }
@@ -41,32 +39,36 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                  getTagsList();
          }, []);
 
+		const getTagsValue = tags => {
+			const tagsValues = tags.map(tag =>{ 
+				const tagLine = {value: tag,label: tag,name: 'tags'};
+				return tagLine; 
+			});			
+			return tagsValues;
+	}
+		
         const handleSubmit = event => {
-
                 event.preventDefault();
                 onSubmit(productData);
         }
 
         const handleChange = event => {
-
                 setProductData (oldProductData => ({
                         ...oldProductData,
                         [event.target.name]: event.target.value,
                 }))
         }
 
-        const handleChangeSelect = event => {                
+        const handleChangeSelect = event => {  
                 setProductData (oldProductData => ({
                         ...oldProductData,
                         [event.name]: event.value,
                 }))
         }
 
-        const handleChangeMultiSelect = event => {
-                
+        const handleChangeMultiSelect = event => {                
                 let tags = [];
                 let nameEle = "";
-
 
                 event.forEach(element => {
                         tags.push(element.value);                   
@@ -79,10 +81,19 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                         [nameEle]: tags,
                 }))
         }
+		  const handleFile = e => {
+			  debugger;
+			  console.log(e);
+				 setProductData(oldProductData => ({
+				 	...oldProductData, 
+				 	['photo']: e
+				 }))  			  
+		  }
+
+		  const handleError = ({error}) => alert(error);
 
         const animatedComponents = makeAnimated();
-
-        const {description, price} = productData;
+        const {name, price} = productData;
 
         return (
 
@@ -94,14 +105,14 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
 
                 <Input
                   type="text"
-                  name="description"
+                  name="name"
                   label="Descripcion"
                   className="loginForm-field"
-                  value={description}
+                  value={name}
                   onChange={handleChange}
                 />
 
-                  <Input
+               <Input
                   type="text"
                   name="price"
                   label="Precio"
@@ -111,9 +122,10 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                 />
 
                 <Select
-                        name="estado"
+                        name="sale"
                         options={optionsItems}
-                        onChange={handleChangeSelect} />
+                        onChange={handleChangeSelect}
+                />
                 <Select
                    closeMenuOnSelect={false}
                    components={animatedComponents}
@@ -124,13 +136,18 @@ const NewProductPage = ({ onSubmit, isLoading }) => {
                    options={tagsOptions}
                 />
 
-                <File name="picture" onChange={handleChange}/>
+
+               <File 
+					 	name="photo" 
+						onFileSelectSuccess={handleFile} 
+						onFileSelectError={handleError}
+					/>
 
                 <Button
                 type="submit"
                 className="loginForm-submit"
                 variant="primary"
-                disabled={isLoading || !description || !price}
+                disabled={!name || !price}
 
                 >
                 Publicar

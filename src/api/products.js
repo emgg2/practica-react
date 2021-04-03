@@ -15,7 +15,9 @@ export const getProductById = (productId) => {
 export const createProduct = product => {
     
     const url = `${productBaseUrl}/adverts`;
-    return client.post(url, product);
+    return client.post(url, product, {
+        headers: {'Content-Type': 'multipart/form-data'}
+    });
 }
 
 export const createLike = productId => {

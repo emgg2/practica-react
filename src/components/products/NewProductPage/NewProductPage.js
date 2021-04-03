@@ -11,19 +11,15 @@ import { Redirect } from 'react-router';
 
 
 const NewProductPage = ({  history }) => {
-        const [productData, setProductData] = React.useState ({
-                description: '',
-                price:'',
-                status: '',
-                tags: [],
-                file: ''
-        });
+
 
    
         const handleSubmit = async productData => {
                 try 
                 {
-                        await createProduct(productData);                
+                        debugger;
+						const formData = getFormData(productData);
+                        await createProduct(formData);                
                         history.push("/");
 
                 }catch (error) {
@@ -33,19 +29,20 @@ const NewProductPage = ({  history }) => {
                 }                
                 
         }
-
-        const handleChange = event => {
-                setProductData (oldProductData => ({
-                        ...oldProductData,
-                        [event.target.name]: event.target.value,
-                }))
-        }
-        const animatedComponents = makeAnimated();
-
-        const {description, price} = productData;
+		
+      
+		const getFormData = (productData) => {
+			let formData = new FormData;
+			formData.append('name', productData.name);
+			formData.append('price', productData.price);
+			formData.append('sale', productData.sale);
+			formData.append('tags', productData.tags);
+			formData.append('photo', productData.photo);
+			return formData;
+		}
 
         return ( 
-            <Layout title="New Product" onSubmit={handleSubmit}>
+            <Layout title="New Product" onSubmit={handleSubmit} >
                 
                 <NewProductPageForm onSubmit={handleSubmit}></NewProductPageForm>
             </Layout> 

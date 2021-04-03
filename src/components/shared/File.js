@@ -1,26 +1,24 @@
-import React, { useState } from 'react';
-import FileUploader from './FileUploader';
+import React, { useRef } from 'react';
 
-const File = () => {
-   const [name, setName] = useState("");
-   const [selectedFile, setSelectedFile] = React.useState(null);
+
+const File = ({onFileSelectSuccess, onFileSelectError}) => {
    
-   const handleChange = event => {      
-       setSelectedFile (event.target.files[0]);
-   }
+    const fileRef = useRef();
 
-   const handleName = (e) => setName(e.target.value);
-   const handleFile = (file) => setSelectedFile(file);
-   const handleError = ({error}) => alert(error);
-
+    const handleFileInput = (e) => {                
+        const file = e.target.files[0];
+        onFileSelectSuccess(file);
+        // if(file.size > 1024) 
+        //      onFileSelectError ({ error: "El fichero no puede exceder de 1MB"})
+        // else  onFileSelectSuccess (file);        
+        
+    };
+   
+   
     return (
         <div>
-            <input type="text" value={name} onChange={handleName} />
-            <FileUploader 
-                onFileSelectSuccess={handleFile}
-                onFileSelectError={handleError}
-
-            />
+            <input type='file' onChange= {handleFileInput} ref={fileRef} />
+          
            
         </div>
     );
