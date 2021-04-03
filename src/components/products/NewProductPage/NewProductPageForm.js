@@ -82,7 +82,6 @@ const NewProductPage = ({ onSubmit }) => {
                 }))
         }
 		  const handleFile = e => {
-			  debugger;
 			  console.log(e);
 				 setProductData(oldProductData => ({
 				 	...oldProductData, 
