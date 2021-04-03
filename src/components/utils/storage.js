@@ -4,6 +4,7 @@ const storage = {
       if (!value) {
         return null;
       }
+
       return JSON.parse(value);
     },
   

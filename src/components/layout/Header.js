@@ -18,11 +18,14 @@ const Header = ({ className, ...props }) => {
                 <nav className="header-nav">
                      
                 <Link to="/product"> 
-                <Button
-                    to="/google"
+                <Button                    
                     variant="primary"
                     className='header-button'>Product</Button>
-                </Link>                
+                </Link>  
+
+                <Button                    
+                    variant="primary"
+                    className='header-button'>Búsqueda</Button>       
                 <AuthButton className="header-button" />
             </nav>
 

@@ -7,6 +7,7 @@ import Spinner from '../../shared/Spinner';
 import {Link} from 'react-router-dom';
 import ProductItem from './ProductItem';
 import pT from 'prop-types';
+import SearchingFormPage from '../../searching/SearchingFormPage';
 
 
 const ProductPage = ({ isLogged, onLogout, history, ...props }) => {
@@ -30,7 +31,9 @@ const ProductPage = ({ isLogged, onLogout, history, ...props }) => {
         
     },[]);
 
-   
+   const handleSearching = () => {
+
+   };
 
     const items = products.map(product =>{        
      return (
@@ -40,10 +43,16 @@ const ProductPage = ({ isLogged, onLogout, history, ...props }) => {
     )});
 
     return (
-        <Layout title="Product List" { ...props } >            
+        <React.Fragment>
+            <div className="searchingForm">
+                <SearchingFormPage 
+                    onChange={handleSearching}
+                />
+            </div> 
+            <Layout title="Product List" { ...props } >            
                 <div className={scopedStyles.content}> {items} </div>                
-        </Layout> 
-    
+            </Layout> 
+        </React.Fragment>    
     );
 }
 

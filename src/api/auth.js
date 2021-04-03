@@ -7,9 +7,8 @@ export const login = (credentials, savePassword) => {
     return client
     .post('/api/auth/login', credentials)
     .then(({accessToken}) =>{
-        configureClient(accessToken)
+        configureClient({accessToken})
         if(savePassword){
-
             storage.set('auth', accessToken);
 
         }

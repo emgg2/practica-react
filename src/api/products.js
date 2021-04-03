@@ -36,7 +36,7 @@ export const deleteProduct = productId => {
 }
 
 export const getTags = () => {
-    const url = `${productBaseUrl}/tags`;
+    const url = `${productBaseUrl}/adverts/tags`;
     return  client.get(url);
 }
 

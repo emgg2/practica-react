@@ -1,12 +1,12 @@
 import React from 'react';
 import './NewProductPage.css';
 import Input from '../../shared/Input';
-import makeAnimated from 'react-select/animated';
-import Select from 'react-select';
 import Button from '../../shared/Button';
 import File from '../../shared/File';
-import { getTags } from '../../../api/tags';
 import { createProduct } from '../../../api/products';
+import SelectSale from '../../shared/SelectSale';
+import MultiSelectTags from '../../shared/MultiSelectTags';
+
 
 
 const NewProductPage = ({ onSubmit }) => {
@@ -17,36 +17,7 @@ const NewProductPage = ({ onSubmit }) => {
                 tags: [],
                 photo: ''
         });
-        const [tagsOptions, setTagsOptions] = React.useState({
-                value: '',
-                label: '',
-                name:'tags'
-        });
 
-        const optionsItems = [
-                { value: true, label: 'En Venta' , name:'sale'},
-                { value: false, label: 'Se Busca', name:'sale' },
-              ];
-
-         React.useEffect (() => {
-         async function getTagsList() {
-                 try{
-                 		setTagsOptions(getTagsValue(await getTags()));
-                 }catch (error) {
-                 } finally {
-                         }
-                 }
-                 getTagsList();
-         }, []);
-
-		const getTagsValue = tags => {
-			const tagsValues = tags.map(tag =>{ 
-				const tagLine = {value: tag,label: tag,name: 'tags'};
-				return tagLine; 
-			});			
-			return tagsValues;
-	}
-		
         const handleSubmit = event => {
                 event.preventDefault();
                 onSubmit(productData);
@@ -75,7 +46,6 @@ const NewProductPage = ({ onSubmit }) => {
                         nameEle = element.name;
                 });              
                 
-                console.log(tags);
                 setProductData (oldProductData => ({
                         ...oldProductData,
                         [nameEle]: tags,
@@ -90,8 +60,7 @@ const NewProductPage = ({ onSubmit }) => {
 		  }
 
 		  const handleError = ({error}) => alert(error);
-
-        const animatedComponents = makeAnimated();
+       
         const {name, price} = productData;
 
         return (
@@ -120,21 +89,14 @@ const NewProductPage = ({ onSubmit }) => {
                   onChange={handleChange}
                 />
 
-                <Select
-                        name="sale"
-                        options={optionsItems}
-                        onChange={handleChangeSelect}
-                />
-                <Select
-                   closeMenuOnSelect={false}
-                   components={animatedComponents}
-                   defaultValue={[tagsOptions[1],tagsOptions[1]]}
-                   isMulti
-                   name="tags"
-                   onChange={handleChangeMultiSelect}
-                   options={tagsOptions}
-                />
+               <SelectSale                 
+                  onChange={handleChangeSelect}
+               />
 
+					
+					<MultiSelectTags
+					 	onChange={handleChangeMultiSelect}
+					 />             
 
                <File 
 					 	name="photo" 
@@ -142,15 +104,14 @@ const NewProductPage = ({ onSubmit }) => {
 						onFileSelectError={handleError}
 					/>
 
-                <Button
-                type="submit"
-                className="loginForm-submit"
-                variant="primary"
-                disabled={!name || !price}
-
-                >
-                Publicar
-                </Button>
+               <Button
+                	type="submit"
+                	className="loginForm-submit"
+                	variant="primary"
+                	disabled={!name || !price}
+               >
+                	Publicar
+               </Button>
 
 
                 </form>
