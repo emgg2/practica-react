@@ -14,7 +14,6 @@ const MultiSelectTags = ({onChange}) => {
     });
 
     const getTagsValue = tags => {
-        debugger;
         const tagsValues = tags.map(tag =>{ 
             const tagLine = {value: tag,label: tag,name: 'tags'};
             return tagLine; 

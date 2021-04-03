@@ -1,23 +1,14 @@
 import React from 'react';
 import Input from '../shared/Input';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
+import MultiSelectTags from '../shared/MultiSelectTags';
+import SelectSale from '../shared/SelectSale';
+import pT from 'prop-types';
+
 
 const SearchingFormPage = ({OnChange, products}) => {
     const [searchName, setSearchName] = React.useState("");
     const [searchSale, setSearchSale] = React.useState("");
     const [searchTags, setSearchTags] = React.useState("");
-
-    const [tagsOptions, setTagsOptions] = React.useState({
-        value: '',
-        label: '',
-        name:'tags'
-    });
-
-    const optionsItems = [
-        { value: true, label: 'En Venta' , name:'sale'},
-        { value: false, label: 'Se Busca', name:'sale' },
-      ];
 
     const handleChange = event => setSearchName (event.target.value);
     
@@ -39,7 +30,7 @@ const SearchingFormPage = ({OnChange, products}) => {
         // }))
     }
 
-    const animatedComponents = makeAnimated();
+    
     return (
         <React.Fragment>
             <Input 
@@ -48,25 +39,22 @@ const SearchingFormPage = ({OnChange, products}) => {
                 label="Descripción"
                 className="loginForm-field"
                 value={searchName}
-                autofocus
+                autoFocus
                 onChange={handleChange}
             />
-            <Select
-                name="sale"
-                options={optionsItems}
+            <SelectSale 
                 onChange={handleChangeSelect}
-            />
-            <Select
-                closeMenuOnSelect={false}
-                components={animatedComponents}
-                defaultValue={[tagsOptions[1],tagsOptions[1]]}
-                isMulti
-                name="tags"
+            />            
+            <MultiSelectTags
                 onChange={handleChangeMultiSelect}
-                options={tagsOptions}
             />
+            
         </React.Fragment>
     );
 };
+
+// SearchingFormPage.propTypes {
+
+// }
 
 export default SearchingFormPage;
