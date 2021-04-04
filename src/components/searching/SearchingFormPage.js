@@ -6,9 +6,11 @@ import { getProducts } from '../../api/products';
 import pT from 'prop-types';
 
 
-const SearchingFormPage = ({onChange, items}) => {  
+const SearchingFormPage = ({onChange, items}) => {
+    const [results, setResults] = useState(items);  
     const [searchName, setSearchName] = useState('');  
     const [searchSale, setSearchSale] = useState('');
+    const [searchTags, setSearchTags] = useState('');
     const [filters, setFilters] = useState({
         name: '',
         sale: '',
@@ -17,23 +19,16 @@ const SearchingFormPage = ({onChange, items}) => {
     });
     
     const handleChange = event => setSearchName(event.target.value);
-    const handleChangeSelect = event =>{debugger; setSearchSale(event.value); }
-        
+    const handleChangeSelect = event =>{debugger; setSearchSale(event.value); }     
     const handleChangeMultiSelect = event => {                
         let tags = [];
-        let nameEle = "";
 
         event.forEach(element => {
-            tags.push(element.value);                   
-            nameEle = element.name;
+            tags.push(element.value);                       
         });              
     
-        setFilters (oldProductData => ({
-            ...oldProductData,
-            [nameEle]: tags,
-        }))
+        setSearchTags(tags);        
     }
-
 
     function filterByName(obj) {          
         return ('name' in obj && obj.name.toLowerCase().includes(searchName.toLowerCase())) ? true : false;        
@@ -42,8 +37,6 @@ const SearchingFormPage = ({onChange, items}) => {
     function filterBySale(obj) {
        return ('sale' in obj && obj.sale === searchSale) ? true : false;        
     }
-
-
    
     // React.useEffect(() => {
     //     debugger;
@@ -54,20 +47,25 @@ const SearchingFormPage = ({onChange, items}) => {
 
     useEffect(() => {     
         
-        if(searchName.length > 0) {
-            onChange(items.filter(filterByName));          
+        if(searchName.length > 0  ) {
+            debugger;
+            const res = results.filter(filterByName);
+            setResults(res);
+            onChange(res);          
             
-        }else 
+        }else
         {
             onChange(items);
         }                
-    }, [searchName])
+    }, [searchName, ])
 
     useEffect(()=> {
-        debugger;
+     
 
         if(searchSale !== "" ) {
-            onChange(items.filter(filterBySale));          
+            const res = items.filter(filterBySale)
+            setResults(res);
+            onChange(res);          
             
         }else 
         {
