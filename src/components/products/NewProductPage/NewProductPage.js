@@ -11,16 +11,13 @@ import { Redirect } from 'react-router';
 
 
 const NewProductPage = ({  history }) => {
-
-
    
         const handleSubmit = async productData => {
                 try 
                 {
-                        debugger;
-						const formData = getFormData(productData);
-                        await createProduct(formData);                
-                        history.push("/");
+					const formData = getFormData(productData);
+					await createProduct(formData);                
+					history.push("/");
 
                 }catch (error) {
 
@@ -42,13 +39,10 @@ const NewProductPage = ({  history }) => {
 		}
 
         return ( 
-            <Layout title="New Product" onSubmit={handleSubmit} >
-                
+            <Layout title="New Product" onSubmit={handleSubmit} >                
                 <NewProductPageForm onSubmit={handleSubmit}></NewProductPageForm>
-            </Layout> 
-        
-        );
-    
+            </Layout>         
+        );    
 }
 
 export default NewProductPage;

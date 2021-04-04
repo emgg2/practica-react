@@ -16,11 +16,11 @@ client.interceptors.response.use(
             message: error.response.statusText,
             ...error.response,
         })
-    });
+});
 
 const removeAuthorizationHeader = () => {
-        delete client.defaults.headers.common['Authorization'];
-      };      
+    delete client.defaults.headers.common['Authorization'];
+};      
 
 export const configureClient = ({accessToken}) => {    
     if(accessToken) {

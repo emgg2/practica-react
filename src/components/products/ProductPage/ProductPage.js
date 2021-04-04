@@ -1,57 +1,97 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { getProducts } from '../../../api/products';
-import scopedStyles from './ProductPage.module.css';
+
 import './ProductPage.css';
-import Layout from '../../layout/Layout';
+
 import Spinner from '../../shared/Spinner';
-import {Link} from 'react-router-dom';
-import ProductItem from './ProductItem';
+import ProductList from './ProductList';
+
+
 import pT from 'prop-types';
 import SearchingFormPage from '../../searching/SearchingFormPage';
 
 
-const ProductPage = ({ isLogged, onLogout, history, ...props }) => {
-    
-    const [products, setProducts] = React.useState([]);
- 
+const ProductPage = ({ ...props }) => {
+    const [products, setProducts] = useState([]);    
+    const [filteredProducts, setFilteredProducts] = useState([]);
   
     React.useEffect(() => {
+        console.log("ejecuto use effect product page");
         async function getProductList () {
         try {            
-           // onLoading(true);                       
-            setProducts( await getProducts());            
+           // onLoading(true);                        
+           const prdt = await getProducts();
+            setProducts(prdt);
+            setFilteredProducts(prdt);     
+
         } catch (error) {        
            // onError(error);            
         }finally
         {            
          //   onLoading(false);
         }
-    }
+        }
     getProductList();
         
     },[]);
 
-   const handleSearching = () => {
+    const handleFilteredProducts = (products) => setFilteredProducts(products);
 
-   };
+    
 
-    const items = products.map(product =>{        
-     return (
-        <Link to={`/product/${product.id}`} key={product.id}>            
-        <ProductItem product={product} key={product.id}  />
-       </Link>
-    )});
 
+//     function filterByName(obj, searchName) {          
+//         return ('name' in obj && obj.name.toLowerCase().includes(searchName.toLowerCase())) ? true : false;        
+//     }
+        
+//     function filterBySale(obj, searchSale) {
+//         return ('sale' in obj && obj.sale.includes(searchSale)) ? true : false;        
+//     }
+
+//     function filterByTags(obj, searchTags) {
+//         return ('tags' in obj && obj.tags.includes)
+//     }
+
+
+
+//    const handleSearching = (filters) => {
+//     console.log("eva", results)
+
+//     let res;
+//         // console.log("buscando", filters);
+
+//          if(filters.name.length > 0) {
+//               res = results.filter((result)=>filterByName(result, filters.name)); 
+             
+//          }
+
+//          console.log("filtros")
+//              console.log(res)
+//         // if(filters.tags.length > 0) {
+            
+
+//         // }
+
+//         // if(filters.sale.length > 0) {
+
+//         // }
+//         setResults(results);
+
+//    };
+
+
+    console.log('render product page');
     return (
         <React.Fragment>
-            <div className="searchingForm">
-                <SearchingFormPage 
-                    onChange={handleSearching}
-                />
-            </div> 
-            <Layout title="Product List" { ...props } >            
-                <div className={scopedStyles.content}> {items} </div>                
-            </Layout> 
+            <SearchingFormPage 
+                items={products}
+                onChange={handleFilteredProducts}
+            />
+             
+            <ProductList
+                products={filteredProducts} 
+                {...props}
+            />           
         </React.Fragment>    
     );
 }
