@@ -4,21 +4,22 @@ import MultiSelectTags from '../shared/MultiSelectTags';
 import SelectSale from '../shared/SelectSale';
 import { getProducts } from '../../api/products';
 import pT from 'prop-types';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
+import RangeSlider from 'react-bootstrap-range-slider';
+
+
 
 
 const SearchingFormPage = ({onChange, items}) => {    
     const [searchName, setSearchName] = useState('');  
     const [searchSale, setSearchSale] = useState('');
     const [searchTags, setSearchTags] = useState('');
-    const [filters, setFilters] = useState({
-        name: '',
-        sale: '',
-        tags: ''
-  
-    });
-    
+    const [searchRange, setSearchRange] = useState (0);
+        
     const handleChange = event => setSearchName(event.target.value);
-    const handleChangeSelect = event =>{debugger; setSearchSale(event.value); }     
+    const handleChangeSelect = event =>setSearchSale(event.value); 
+    const handleRange=event=>setSearchRange(event.target.value);   
     const handleChangeMultiSelect = event => {                
         let tags = [];
 
@@ -28,106 +29,56 @@ const SearchingFormPage = ({onChange, items}) => {
     
         setSearchTags(tags);        
     }
-
-    function filterByName(obj) {    
-        debugger;      
-        return ('name' in obj && obj.name.toLowerCase().includes(searchName.toLowerCase())) ? true : false;        
-    }
-
-    function filterBySale(obj) {
-        debugger;
-       return ('sale' in obj && obj.sale === searchSale) ? true : false;        
-    }
-
-    function filterByTags(obj) {
-        debugger;
-        return ('tags' in obj  ) ? true : false;
-    }
-
-    function filterByNameAndTags(obj) {
-        return (
-            'name' in obj &&         
-            'tags' in obj &&
-             obj.name.toLowerCase().includes(searchName.toLowerCase())            
-        ) ? true: false;
-    }
-
-    function filterByNameAndSale(obj) {
-        debugger;
-        return (
-            'name' in obj &&
-            'sale' in obj && 
-            obj.name.toLowerCase().includes(searchName.toLowerCase()) &&            
-            obj.sale === searchSale            
-        ) ? true: false;
-    }
-
-    function filterBySaleAndTags(obj) {
-        return (            
-            filterBySale &&
-            filterByTags
-        ) ? true: false;
-    }
+    
 
     function filterByAll(obj) {
-        return (
-            filterByName &&
-            filterBySale &&
-            filterByTags
+        let nameFound = true;
+        let saleFound = true;
+        let tagsFound = true;
+        let priceFound = true;
 
+        if(searchName.length > 0) {
+            nameFound =  ('name' in obj && obj.name.toLowerCase().includes(searchName.toLowerCase()))  ;
+        }
+        if(searchSale !== "") {
+            saleFound = ('sale' in obj && obj.sale === searchSale);            
+        }
+
+        if(searchTags.length > 0) {
+            let tagFound = [];
+            searchTags.forEach(tag => { 
+                tagFound.push(obj.tags.find(element => element === tag));
+            });
+            tagsFound = ('tags' in obj && !tagFound.includes(undefined));
+        }
+
+        if(searchRange > 0) {
+            priceFound = ('price' in obj && obj.price <= searchRange); 
+        }
+
+        return (            
+            nameFound &&            
+            saleFound &&            
+            tagsFound  &&
+            priceFound
+            
         ) ? true: false;
     }
-   
-    // React.useEffect(() => {
-    //     debugger;
-    //     if(searchSale.length > 0) { setResults(results.filter(filterBySale)) }    
-    //     onChange(results);        
-    // }, [searchSale])
-
-
-    useEffect(() => {     
-        let res = null;
-        debugger;
-        
-        if( searchName.length > 0 && 
-            searchTags.length > 0 && 
-            searchSale !=="") {
-            const res = items.filter(filterByAll);
-            onChange(res);
-
-        }else if(searchName.length > 0 && 
-                searchTags.length > 0) {
-            const res = items.filter(filterByNameAndTags);       
-            onChange(res);
-        }else if(searchName.length > 0 && 
-                searchSale !=="" ) {
-            const res = items.filter(filterByNameAndSale);            
-            onChange(res);
-        }else if(searchTags.length > 0 &&
-                 searchSale !=="") {
-            const res = items.filter(filterBySaleAndTags);            
-            onChange(res);
-        }else if(searchName.length > 0)
-        {
-            const res = items.filter(filterByName);                       
-            onChange(res);
-        }else if(searchSale !=="")
-        {
-            const res = items.filter(filterBySale);
-            onChange(res);
-        }else if(searchTags.length > 0){
-            const res = items.filter(filterByTags);
-            onChange(res);
+ 
+    useEffect(() => {    
+        if( searchName.length > 0 ||
+            searchTags.length > 0 || 
+            searchSale !=="" ||
+            searchRange > 0) {
+                const res = items.filter(filterByAll);
+                onChange(res);           
         }else 
         {
             onChange(items)
-        }        
+        }             
+    }, [searchName, searchSale, searchTags, searchRange ])
 
-    }, [searchName, searchSale, searchTags ])
-
-
-   //  console.log("render", searchName);
-     console.log(items);
+   
     return (
         <React.Fragment>
             <Input 
@@ -146,6 +97,15 @@ const SearchingFormPage = ({onChange, items}) => {
             <MultiSelectTags
                 onChange={handleChangeMultiSelect}
             />
+            <RangeSlider
+                value={searchRange}
+                min={0}
+                max={500}
+                step={10}
+                onChange={handleRange}
+            
+            />
+
             
         </React.Fragment>
     );
