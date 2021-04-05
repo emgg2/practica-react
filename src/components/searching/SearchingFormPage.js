@@ -6,8 +6,7 @@ import { getProducts } from '../../api/products';
 import pT from 'prop-types';
 
 
-const SearchingFormPage = ({onChange, items}) => {
-    const [results, setResults] = useState(items);  
+const SearchingFormPage = ({onChange, items}) => {    
     const [searchName, setSearchName] = useState('');  
     const [searchSale, setSearchSale] = useState('');
     const [searchTags, setSearchTags] = useState('');
@@ -30,12 +29,53 @@ const SearchingFormPage = ({onChange, items}) => {
         setSearchTags(tags);        
     }
 
-    function filterByName(obj) {          
+    function filterByName(obj) {    
+        debugger;      
         return ('name' in obj && obj.name.toLowerCase().includes(searchName.toLowerCase())) ? true : false;        
     }
 
     function filterBySale(obj) {
+        debugger;
        return ('sale' in obj && obj.sale === searchSale) ? true : false;        
+    }
+
+    function filterByTags(obj) {
+        debugger;
+        return ('tags' in obj  ) ? true : false;
+    }
+
+    function filterByNameAndTags(obj) {
+        return (
+            'name' in obj &&         
+            'tags' in obj &&
+             obj.name.toLowerCase().includes(searchName.toLowerCase())            
+        ) ? true: false;
+    }
+
+    function filterByNameAndSale(obj) {
+        debugger;
+        return (
+            'name' in obj &&
+            'sale' in obj && 
+            obj.name.toLowerCase().includes(searchName.toLowerCase()) &&            
+            obj.sale === searchSale            
+        ) ? true: false;
+    }
+
+    function filterBySaleAndTags(obj) {
+        return (            
+            filterBySale &&
+            filterByTags
+        ) ? true: false;
+    }
+
+    function filterByAll(obj) {
+        return (
+            filterByName &&
+            filterBySale &&
+            filterByTags
+
+        ) ? true: false;
     }
    
     // React.useEffect(() => {
@@ -46,32 +86,45 @@ const SearchingFormPage = ({onChange, items}) => {
 
 
     useEffect(() => {     
+        let res = null;
+        debugger;
         
-        if(searchName.length > 0  ) {
-            debugger;
-            const res = results.filter(filterByName);
-            setResults(res);
-            onChange(res);          
-            
-        }else
+        if( searchName.length > 0 && 
+            searchTags.length > 0 && 
+            searchSale !=="") {
+            const res = items.filter(filterByAll);
+            onChange(res);
+
+        }else if(searchName.length > 0 && 
+                searchTags.length > 0) {
+            const res = items.filter(filterByNameAndTags);       
+            onChange(res);
+        }else if(searchName.length > 0 && 
+                searchSale !=="" ) {
+            const res = items.filter(filterByNameAndSale);            
+            onChange(res);
+        }else if(searchTags.length > 0 &&
+                 searchSale !=="") {
+            const res = items.filter(filterBySaleAndTags);            
+            onChange(res);
+        }else if(searchName.length > 0)
         {
-            onChange(items);
-        }                
-    }, [searchName, ])
-
-    useEffect(()=> {
-     
-
-        if(searchSale !== "" ) {
-            const res = items.filter(filterBySale)
-            setResults(res);
-            onChange(res);          
-            
+            const res = items.filter(filterByName);                       
+            onChange(res);
+        }else if(searchSale !=="")
+        {
+            const res = items.filter(filterBySale);
+            onChange(res);
+        }else if(searchTags.length > 0){
+            const res = items.filter(filterByTags);
+            onChange(res);
         }else 
         {
-            onChange(items);
-        }                
-    },[searchSale])
+            onChange(items)
+        }        
+
+    }, [searchName, searchSale, searchTags ])
+
 
    //  console.log("render", searchName);
      console.log(items);
