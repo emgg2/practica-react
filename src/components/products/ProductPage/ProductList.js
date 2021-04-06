@@ -1,6 +1,6 @@
 import ProductItem from './ProductItem';
 import {Link} from 'react-router-dom';
-import Layout from '../../layout/Layout';
+
 import scopedStyles from './ProductPage.module.css';
 
 const ProductList = ({products, ...props}) => {    
@@ -13,10 +13,9 @@ const ProductList = ({products, ...props}) => {
        )});
 
 
-    return(
-    <Layout title="Product List" { ...props } >            
-        <div className={scopedStyles.content}> {items} </div>                
-    </Layout> 
+    return(             
+        <div className={scopedStyles.content}> {items} </div>               
+
     );
 
 };

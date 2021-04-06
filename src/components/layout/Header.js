@@ -21,11 +21,7 @@ const Header = ({ className, ...props }) => {
                 <Button                    
                     variant="primary"
                     className='header-button'>Product</Button>
-                </Link>  
-
-                <Button                    
-                    variant="primary"
-                    className='header-button'>Búsqueda</Button>       
+                </Link>   
                 <AuthButton className="header-button" />
             </nav>
 
