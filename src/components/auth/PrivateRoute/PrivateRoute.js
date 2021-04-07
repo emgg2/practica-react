@@ -1,11 +1,10 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
-import storage from '../../utils/storage'
-import  AuthContext  from '../context';
+import  {useAuthContext}  from '../context';
 
 const PrivateRoute = props => {
-		const { isLogged } = React.useContext(AuthContext);
-    const routeProps =  isLogged
+	const { isLogged } = useAuthContext();
+   const routeProps =  isLogged
      ? props
      : {
          children: ({location}) => (

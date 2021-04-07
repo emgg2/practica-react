@@ -3,37 +3,26 @@ import pT from 'prop-types';
 
 import Button from '../../shared/Button';
 import Input from '../../shared/Input';
+import Checkbox from '../../shared/Checkbox';
+import useForm from '../../../hooks/useForm';
 
 import './LoginForm.css';
-import Checkbox from '../../shared/Checkbox';
 
 function LoginForm({ onSubmit, isLoading }) {
-    const [credentials, setCredentials] = React.useState ({
+
+    const [credentials, handleChange, handleCheck] = useForm ({
         email: '',
         password: '',
+        savePassword: false,
         });
-    const [savePassword, setSavePassword] = React.useState(false);
     
-const handleSubmit = event => {
+    const handleSubmit = event => {
+          event.preventDefault();    
+          onSubmit(credentials);
+    };
 
-  event.preventDefault();
-  onSubmit(credentials,savePassword);
 
-};
-
-const handleChange = event => { 
-  setCredentials (oldCredentials => ({
-    ...oldCredentials,
-    [event.target.name]: event.target.value,
-  }));
-}     
-
-const handleSavePassword= event => {
-  
-  setSavePassword(!savePassword);
-  
-}
-const {email, password} = credentials;   
+const {email, password, savePassword} = credentials;   
 
 return (
     <form className="loginForm" onSubmit={handleSubmit} >
@@ -57,7 +46,7 @@ return (
       <Checkbox 
         value="Guardar password"
         name="Guardar Password"
-        onChange={handleSavePassword}
+        onChange={handleCheck}
         checked={savePassword ? true: false }
         label="Guardar Password" />
           
@@ -67,7 +56,7 @@ return (
         type="submit"
         className="loginForm-submit"
         variant="primary"           
-        disabled={isLoading || !credentials.email || !credentials.password}
+        disabled={!credentials.email || !credentials.password}
       >
         Log in
       </Button>
@@ -77,11 +66,9 @@ return (
 
 LoginForm.propTypes = {
   onSubmit : pT.func.isRequired,
-  isLoading: pT.bool
+
 }
 
-LoginForm.defaultProps = {
-  isLoading: false,
-}
+
 
 export default LoginForm;

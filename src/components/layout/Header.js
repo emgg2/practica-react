@@ -9,7 +9,7 @@ import AuthButton from '../auth/AuthButton/';
 const Header = ({ className, ...props }) => {
      
     return (
-        <header className={classNames('header', classNames)} {...props}>
+        <header className={classNames('header', classNames)} >
                 <Link to="/"> 
                     <div className="header-logo">
                         <Icon width="32" height="32"/>
