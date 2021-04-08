@@ -1,44 +1,35 @@
-import { findAllByTestId } from "@testing-library/dom";
-import { useEffect, useState } from "react";
-import { Redirect } from "react-router";
+import React  from "react";
 import {deleteProduct} from '../../api/products';
 import Button from "./Button";
+import useError from '../../hooks/useError';
+import useIsLoading from '../../hooks/useIsLoading';
 
 
 const DeleteButton = ({productId, history}) => {
 
-    const [isDelete, setIsDelete] = useState(false);
+    const [isDelete, setIsDelete] = React.useState(false);
+    const [error, handleError] = useError(false);
+    const [isLoading, handleIsLoading] = useIsLoading(false);
 
-    useEffect(()=>{
+    React.useEffect(()=>{
         async function setDeleteProduct () {
             try {          
-               // onLoading(true);                  
+               handleIsLoading(true);                  
                if(isDelete === true){
-                   try {
-                        await deleteProduct(productId);                             
-                        history.push("/");
-                   } catch (error) {
-                       
-                   }finally {
-                       
-                   }
-                    
-                    
-               }      
-                
-               
+                    await deleteProduct(productId);                             
+                    history.push("/");
+               }                     
             } catch (error) {        
-               // onError(error);            
+               handleError(error);            
             }finally
             {            
-             //   onLoading(false);
+                handleIsLoading(false);
             }
             }
         setDeleteProduct();   
 
     },[isDelete])  
     const handleDelete = () => {
-        debugger;
         const response = window.confirm("Esta seguro de eliminar el producto " + productId);
         if(response === true)
         {

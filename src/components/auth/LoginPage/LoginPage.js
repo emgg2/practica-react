@@ -9,14 +9,16 @@ import './LoginPage.css';
 import Spinner from '../../shared/Spinner';
 import Advert from '../../shared/Advert';
 
+import useError from '../../../hooks/useError';
+
 //TODO: REHACER ERROR Y SPINNER PARA USAR CUSTOM HOOK, O SINO EN CADA COMPONENTE POR SEPARADO NO ES OBLIGATORIO
 
 function LoginPage({ onLogin, history, location }) {
   const [isLoading, setIsLoading] = React.useState(false); 
-  const [error, setError] = React.useState(null);
+  const [error, handleError] = useError(null);
 
   
-  const handleError = (error) => setError(error);
+  
   const handleLoading = (value) => setIsLoading(value);
   
   const isLogged = React.useRef(false);
@@ -36,13 +38,13 @@ function LoginPage({ onLogin, history, location }) {
     {
       handleLoading(true);
       await login(credentials, savePassword);       
-      isLogged.current = true;  
-           
+      isLogged.current = true;             
     }catch (error) { 
-      handleError(error.data);      
+      debugger;
+        handleError(error.message);      
     } finally
     {
-      handleLoading(false);
+        handleLoading(false);
     }   
   }
     

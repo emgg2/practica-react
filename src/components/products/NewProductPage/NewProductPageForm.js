@@ -1,15 +1,18 @@
 import React from 'react';
+
 import './NewProductPage.css';
+
 import Input from '../../shared/Input';
 import Button from '../../shared/Button';
 import File from '../../shared/File';
-import { createProduct } from '../../../api/products';
 import SelectSale from '../../shared/SelectSale';
 import MultiSelectTags from '../../shared/MultiSelectTags';
 
 
 
+
 const NewProductPage = ({ onSubmit }) => {
+	
 	const [productData, setProductData] = React.useState ({
 			name: '',
 			price:'',
@@ -65,7 +68,6 @@ const NewProductPage = ({ onSubmit }) => {
 
 	return (
 
-
 		<div className="columns">
 			<div className="column is-two-thirds">
 				<h1 className="title">New Product</h1>
@@ -111,10 +113,12 @@ const NewProductPage = ({ onSubmit }) => {
 					>
 						Publicar
 					</Button>
+
 				</form>
 			</div>
-		</div>
-	 );
+	</div>
+
+	);
 
 }
 

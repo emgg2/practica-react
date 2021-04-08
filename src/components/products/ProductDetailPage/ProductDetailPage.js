@@ -5,14 +5,31 @@ import { getProductById } from '../../../api/products';
 import { Redirect } from 'react-router';
 import DeleteButton from '../../shared/DeleteButton';
 
+import useError from '../../../hooks/useError';
+import useIsLoading from '../../../hooks/useIsLoading';
+import ProductDetail from './productDetail';
+
 const ProductDetailPage = ({match, ...props}) => {
     const [product, setProduct] = useState(null);
-    const [error, setError] = useState(null);
+    const [error, handleError] = useError(false);
+    const [isLoading, handleIsLoading] = useIsLoading(false);   
+    
     
     useEffect(()=> {
-        getProductById(match.params.productId)
-            .then(product => setProduct(product))
-            .catch(error => setError(error))
+         async function executeGetProduct (){
+            try {
+                handleIsLoading(true);
+                const product = await getProductById (match.params.productId);
+                setProduct(product);                
+            } catch (error) {
+                debugger;
+                handleError(error.message)
+            }finally {
+                handleIsLoading(false);
+            }
+        }
+        executeGetProduct();
+
         return() => {
             console.log('cleanup')
         }
@@ -24,9 +41,12 @@ const ProductDetailPage = ({match, ...props}) => {
         return <Redirect to='/404' />
     }
     return ( 
-        <Layout title="Product Detail" {...props}>  
+        <Layout title="Product Detail"
+            error={error}
+            isLoading={isLoading}
+        {...props}>  
             <DeleteButton productId={match.params.productId} {...props}/>
-            <div > {JSON.stringify(product)} </div>        
+            <ProductDetail product={product} />     
         </Layout>     
     );
    

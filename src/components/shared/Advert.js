@@ -2,7 +2,7 @@ import pT from 'prop-types';
 
 const Advert = ({message}) => {
   return (
-    <div className="loginPage-error">Error: {message.statusCode} : {message.message}</div>
+    <div className="loginPage-error">Error: {message}</div>
   );
 };
 

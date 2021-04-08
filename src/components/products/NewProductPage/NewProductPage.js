@@ -1,32 +1,34 @@
 import React from 'react';
 import './NewProductPage.css';
 import Layout from '../../layout/Layout';
-import Input from '../../shared/Input';
-import makeAnimated from 'react-select/animated';
-import Select from 'react-select';
-import Button from '../../shared/Button'
+
 import NewProductPageForm from './NewProductPageForm'
 import { createProduct } from '../../../api/products';
-import { Redirect } from 'react-router';
 
+
+import useError from '../../../hooks/useError';
+import useIsLoading from '../../../hooks/useError';
 
 const NewProductPage = ({  history }) => {
+    const [error, handleError] = useError(false);
+    const [isLoading, handleIsLoading] = useIsLoading(false);
    
         const handleSubmit = async productData => {
-                try 
-                {
-					const formData = getFormData(productData);
-					await createProduct(formData);                
-					history.push("/");
+            try 
+            {
+                handleIsLoading(true);
+                const formData = getFormData(productData);
+                await createProduct(formData);                
+                history.push("/");
 
-                }catch (error) {
+            }catch (error) {
+                handleError(error.message);      
 
-                }finally{
+            }finally{
+                handleIsLoading(false);
 
-                }                
-                
-        }
-		
+            }              
+        }		
       
 		const getFormData = (productData) => {
 			let formData = new FormData;
@@ -39,7 +41,11 @@ const NewProductPage = ({  history }) => {
 		}
 
         return ( 
-            <Layout title="New Product" onSubmit={handleSubmit} >                
+            <Layout 
+                onSubmit={handleSubmit} 
+                error={error} 
+                isLoading={isLoading}
+            >                
                 <NewProductPageForm onSubmit={handleSubmit}></NewProductPageForm>
             </Layout>         
         );    
