@@ -12,7 +12,8 @@ const Header = ({ className, ...props }) => {
         <header className={classNames('header', classNames)} >
                 <Link to="/"> 
                     <div className="header-logo">
-                        <Icon width="32" height="32"/>
+                        Nodepop
+                        
                     </div>
                 </Link> 
                 <nav className="header-nav">

@@ -5,7 +5,7 @@ import { getTags } from '../../api/products';
 
 
 
-const MultiSelectTags = ({onChange}) => {
+const MultiSelectTags = ({onChange, label}) => {
 
     const [tagsOptions, setTagsOptions] = React.useState({
         value: '',
@@ -35,10 +35,13 @@ const MultiSelectTags = ({onChange}) => {
         }, []);
 
    
+    
 
     const animatedComponents = makeAnimated();
 
     return (
+        <label className="formField-label">
+        <span>{label}</span>
         <Select 
             closeMenuOnSelect={false}
             components = {animatedComponents}
@@ -47,6 +50,7 @@ const MultiSelectTags = ({onChange}) => {
             onChange={onChange}
             options={tagsOptions}
         />
+        </label>
     );
 };
 

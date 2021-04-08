@@ -85,8 +85,7 @@ const NewProductPage = ({ onSubmit }) => {
 					<Input
 						type="text"
 						name="price"
-						label="Precio"
-						className="loginForm-field"
+						label="Precio"						
 						value={price}
 						onChange={handleChange}
 					/>
@@ -97,6 +96,7 @@ const NewProductPage = ({ onSubmit }) => {
 
 					<MultiSelectTags
 						onChange={handleChangeMultiSelect}
+						label="Tags"
 					/>             
 
 					<File 
