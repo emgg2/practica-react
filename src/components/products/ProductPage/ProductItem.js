@@ -1,6 +1,11 @@
 import scopedStyles from './ProductPage.module.css';
 
 const ProductItem = ({product}) => {
+    
+    const tags = product.tags.map(tag => <p className="tag">{tag}</p>);
+    
+
+
     return (
         <div className = "boxProduct" key={product.id}>                   
         <img src={`${process.env.REACT_APP_API_BASE_URL}${product.photo}`} alt={product.name}></img>
@@ -13,7 +18,7 @@ const ProductItem = ({product}) => {
                 {product.description}
             </p>
             <div className="productDetail">
-                <p className="tag">{product.tags}</p>                            
+                {tags}                   
                 <p className={product.sale === true ? 'sale' : 'lookingFor'}>{product.sale === true ? 'En venta': 'Se busca'}</p>
             </div>
         </div>

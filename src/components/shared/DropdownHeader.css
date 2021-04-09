@@ -13,9 +13,17 @@
     
     padding:15px;
 }
+.formField-desc{
+    font-weight: bold;
+}
+ 
+p {
+    margin: 0;
+}
 
 .iconBox
 {
+    color: gray;
     padding-left: 15px;
     border-left: var(--border-color) ;
 }

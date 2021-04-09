@@ -92,6 +92,7 @@ const NewProductPage = ({ onSubmit }) => {
 
 					<SelectSale                 
 						onChange={handleChangeSelect}
+						label="Estado"
 					/>
 
 					<MultiSelectTags

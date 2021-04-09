@@ -1,4 +1,8 @@
 
+.box {
+    display: flex;
+}
+
 .boxProduct:hover {
     box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.84), 0 0 0 1px rgba(10, 10, 10, 0.58);
 }
@@ -84,4 +88,14 @@
     white-space: nowrap;
     margin-right: 5px;
     margin-bottom: 5px;
+}
+
+.photo {
+    width: 40%;
+
+}
+
+img {
+    width: 100%;
+    height: 100%;
 }

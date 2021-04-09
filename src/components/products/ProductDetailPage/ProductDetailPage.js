@@ -12,8 +12,7 @@ import ProductDetail from './productDetail';
 const ProductDetailPage = ({match, ...props}) => {
     const [product, setProduct] = useState(null);
     const [error, handleError] = useError(false);
-    const [isLoading, handleIsLoading] = useIsLoading(false);   
-    
+    const [isLoading, handleIsLoading] = useIsLoading(false);       
     
     useEffect(()=> {
          async function executeGetProduct (){
@@ -22,7 +21,6 @@ const ProductDetailPage = ({match, ...props}) => {
                 const product = await getProductById (match.params.productId);
                 setProduct(product);                
             } catch (error) {
-                debugger;
                 handleError(error.message)
             }finally {
                 handleIsLoading(false);
@@ -44,9 +42,10 @@ const ProductDetailPage = ({match, ...props}) => {
         <Layout title="Product Detail"
             error={error}
             isLoading={isLoading}
-        {...props}>  
+            {...props}>  
+            {product ? <ProductDetail product={product} />: '' }
             <DeleteButton productId={match.params.productId} {...props}/>
-            <ProductDetail product={product} />     
+            
         </Layout>     
     );
    
