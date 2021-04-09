@@ -24,15 +24,16 @@ function Input({ className, label, autoFocus, ...props }) {
         className
       )}
     >
-      <label className="formField-label">
-        <span>{label}</span>
-        <input
-          className="formField-input"
+      <div className="rowInput">      
+        <div className="divLabel">{label}:</div>
+        <div className="divInput"><input
+          className="css-yk16xz-control"
           autoComplete="off"
           ref={inputRef}
           {...props}
-        ></input>
-      </label>
+        ></input></div>
+      
+      </div>
     </div>
   );
 }

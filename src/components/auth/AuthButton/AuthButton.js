@@ -1,6 +1,6 @@
 import T from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Button } from '../../shared';
+import { ButtonMenu } from '../../shared';
 import { logout } from '../../../api/auth';
 import { AuthContextConsumer } from '../context';
 
@@ -18,7 +18,7 @@ const AuthButton = ({ className, isLogged, onLogout }) => {
         children: 'Log in',
       };
 
-  return <Button className={className} {...props} />;
+  return <ButtonMenu className={className} {...props} />;
 };
 
 AuthButton.propTypes = {

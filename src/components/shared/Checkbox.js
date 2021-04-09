@@ -1,10 +1,10 @@
-
+import './Checkbox.css';
 
 const Checkbox = ({label, ...props}) => {
     return(
-      <div>
+      <div className="rowCheckbox">
       <input type="checkbox" {...props} />
-      <label > {label} </label>
+      <label className="labelCheckbox" > { label } </label>
       </div>
     );
 };
