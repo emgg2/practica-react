@@ -3,10 +3,12 @@ import Input from '../shared/Input';
 import MultiSelectTags from '../shared/MultiSelectTags';
 import SelectSale from '../shared/SelectSale';
 import { getProducts } from '../../api/products';
+import './SearchingPage.css';
 import pT from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
-import RangeSlider from 'react-bootstrap-range-slider';
+import RangeSelector from '../shared/RangeSelector';
+
 
 
 
@@ -80,7 +82,8 @@ const SearchingFormPage = ({onChange, items}) => {
 
    
     return (
-        <React.Fragment>
+
+        <div className="formSearching">
             <Input 
                 type="text"
                 name="name"
@@ -90,24 +93,24 @@ const SearchingFormPage = ({onChange, items}) => {
                 autoFocus
                 onChange={handleChange}
             />
+            <RangeSelector
+                value={searchRange}
+                onChange={handleRange}
+                label="Precio"
+                
+            />
             <SelectSale 
                 onChange={handleChangeSelect}
+                label="Estado"
                 
             />            
             <MultiSelectTags
                 onChange={handleChangeMultiSelect}
-            />
-            <RangeSlider
-                value={searchRange}
-                min={0}
-                max={500}
-                step={10}
-                onChange={handleRange}
-            
+                label="Tags"
             />
 
             
-        </React.Fragment>
+        </div>
     );
 };
 

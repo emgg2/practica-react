@@ -1,6 +1,4 @@
 .formField-label {
-  
-  color: rgb(101, 119, 134);
   display: flex;
   flex-direction: column;
   transition: all 0.2s;
@@ -10,7 +8,7 @@
   width: 100%;
 }
 
-.rowInput {
+.formField-input {
   
   columns: auto
 }

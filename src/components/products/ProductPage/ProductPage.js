@@ -11,6 +11,7 @@ import ProductList from './ProductList';
 import pT from 'prop-types';
 import SearchingFormPage from '../../searching/SearchingFormPage';
 import { Button } from '../../shared';
+import DropdownHeader from '../../shared/DropdownHeader';
 
 
 const ProductPage = ({ ...props }) => {
@@ -42,14 +43,10 @@ const ProductPage = ({ ...props }) => {
     
     return (
         <Layout title="Product List" { ...props } >
-            	<Button
-						type="submit"
-						className="loginForm-submit"
-						variant="primary"						
-                        onClick={handelIsSearching}
-					>
-						Búsqueda Avanzada
-					</Button>
+                <DropdownHeader
+                    onClick = {handelIsSearching}
+                    title = "Búsqueda Avanzada" 
+                    />       
             {isSearching ? <SearchingFormPage 
                 items={products}
                 onChange={handleFilteredProducts}

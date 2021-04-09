@@ -1,7 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
+import pT from 'prop-types';
 
-const SelectSale = ({onChange}) => {
+const SelectSale = ({onChange, label}) => {
     const optionsItems = [
         { value: '', label: '--- Sin valor ---' , name:'sale'},
         { value: true, label: 'En Venta' , name:'sale'},
@@ -9,12 +10,17 @@ const SelectSale = ({onChange}) => {
       ];
     
     return (
-        <Select
-            name="sale"
-            options={optionsItems}
-            onChange={onChange}
-        />
+        <div className="formField-select">
+           <span>{label}</span>        
+            <Select
+                name="sale"
+                options={optionsItems}
+                onChange={onChange}
+            />        
+        </div>
     );
 };
+
+
 
 export default SelectSale;
