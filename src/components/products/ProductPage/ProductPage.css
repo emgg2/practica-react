@@ -85,9 +85,9 @@
     margin-bottom: 5px;
 }
 
-img {
-    width: 260px;
-    height: 200px;
+.imgSmall {
+    width: 100%;
+    height: 220px;
     min-width: 120px;
     min-height: 140px;
     

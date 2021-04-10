@@ -37,9 +37,11 @@ const ProductsAvailable = ({
     );
 };
 
-//TODO: RELLENAR PROPTYPES
-
 ProductsAvailable.propTypes = {
-
+    products: pT.array.isRequired,
+    handleFilteredProducts: pT.func.isRequired,
+    handleIsSearching: pT.func.isRequired,
+    filteredProducts: pT.array.isRequired,
+    isSearching: pT.bool.isRequired
 }
 export default ProductsAvailable;

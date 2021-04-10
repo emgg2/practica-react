@@ -1,0 +1,14 @@
+.imageNPA {
+   height: 100% ;
+}
+
+.noProductAvailable {
+    text-align: center;
+    font-weight: bold;
+}
+
+.containerNPA{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

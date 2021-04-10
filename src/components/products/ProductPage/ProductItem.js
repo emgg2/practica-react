@@ -1,5 +1,6 @@
 import scopedStyles from './ProductPage.module.css';
 import './ProductPage.css';
+import ImageNotFound from '../../shared/ImageNotFound';
 
 
 const ProductItem = ({product}) => {
@@ -7,8 +8,12 @@ const ProductItem = ({product}) => {
     const tags = product.tags.map(tag => <p className="tag">{tag}</p>);
 
     return (
-        <div className = "boxProduct" key={product.id}>                   
-        <img src={`${process.env.REACT_APP_API_BASE_URL}${product.photo}`} alt={product.name}></img>
+        <div className = "boxProduct" key={product.id}>  
+        {product.photo
+            ? <img src={`${process.env.REACT_APP_API_BASE_URL}${product.photo}`} alt={product.name} className="imgSmall"></img>
+            : <ImageNotFound name={product.name}/>
+        }                 
+        
         <div className={scopedStyles.boxDetail} >
             <div className="productDetail" >
                 <p className="productPrice"><b>{product.price}€</b></p>

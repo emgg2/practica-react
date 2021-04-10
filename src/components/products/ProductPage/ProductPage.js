@@ -1,30 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { getProducts } from '../../../api/products'
-import Layout from '../../layout/Layout';
+
 import './ProductPage.css';
-import pT from 'prop-types';
+
+import Layout from '../../layout/Layout';
 import ProductsAvailable from '../ProductsAvailable/ProductsAvailable';
 import NoProductAvailable from '../NoProductAvailable/NoProductAvailable';
 
+import useError from '../../../hooks/useError';
+import useIsLoading from '../../../hooks/useError';
+
 
 const ProductPage = ({ ...props }) => {
-    const [products, setProducts] = useState([]);    
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const [isSearching, setIsSearching] = useState(false);
+    const [products, setProducts] = React.useState([]);    
+    const [filteredProducts, setFilteredProducts] = React.useState([]);
+    const [isSearching, setIsSearching] = React.useState(false);
+    const [error, handleError] = useError(false);
+    const [isLoading, handleIsLoading] = useIsLoading(false);
   
     React.useEffect(() => {
         async function getProductList () {
         try {            
-           // onLoading(true);                        
+            handleIsLoading(true);                       
            const prdt = await getProducts();
             setProducts(prdt);
             setFilteredProducts(prdt);     
 
         } catch (error) {        
-           // onError(error);            
+            handleError(error.message);           
         }finally
         {            
-         //   onLoading(false);
+            handleIsLoading(false);
         }
         }
     getProductList();
@@ -37,6 +43,8 @@ const ProductPage = ({ ...props }) => {
    return (
         <Layout 
             title={(products.length>0 ? 'Productos Disponibles' : '')}
+            error={error}
+            isLoading={isLoading}
             { ...props } 
         >
            {products.length>0 
@@ -56,9 +64,5 @@ const ProductPage = ({ ...props }) => {
     );
 }
 
-//TODO: RELLENAR PROPTYPES
 
-ProductPage.propTypes = {
-
-}
 export default ProductPage;
