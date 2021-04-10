@@ -2,16 +2,13 @@ import React from 'react';
 import Spinner from '../shared/Spinner';
 import Header from './Header';
 import Advert from '../shared/Advert'
+import pT from 'prop-types';
 import './Layout.css';
-
-//TODO: tratamiento de error y spinner, hacerlo con un custom hook 
 
 function Layout ({children, title, error, isLoading,  ...props }) {
     return (
         <div className ="layout">
-
-            <Header className ="layout-header bordered" {...props}/>
-            
+            <Header className ="layout-header bordered" {...props}/>            
             {isLoading && <Spinner />}       
             <main className="layout-main bordered">
                 <h2 className="layout-title bordered">{title}</h2>
@@ -25,5 +22,15 @@ function Layout ({children, title, error, isLoading,  ...props }) {
 
     );
 }
+
+Layout.propTypes = {
+    title: pT.string,
+    error: pT.bool.isRequired,
+    isLoading: pT.bool.isRequired
+}
+
+Layout.defaultProps = {    
+    title: ''
+  }
 
 export default Layout;

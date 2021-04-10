@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import pT from 'prop-types';
 
 
 const File = ({onFileSelectSuccess, onFileSelectError}) => {
@@ -17,11 +18,12 @@ const File = ({onFileSelectSuccess, onFileSelectError}) => {
    
     return (
         <div>
-            <input type='file' onChange= {handleFileInput} ref={fileRef} />
-          
-           
+            <input type='file' onChange= {handleFileInput} ref={fileRef} />                   
         </div>
     );
 };
 
+File.propTypes = {
+    onFileSelectSuccess: pT.func.isRequired,
+}
 export default File;

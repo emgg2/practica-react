@@ -41,16 +41,14 @@ return (
       <Input
         type="text"
         name="email"
-        label="Email"
-        className="loginForm-field"            
+        label="Email"        
         value={email}
         onChange={handleChange}
       />
       <Input
         type="password"
         name="password"
-        label="Password"
-        className="loginForm-field" 
+        label="Password"        
         value={password}           
         onChange={handleChange}
       />
@@ -60,8 +58,6 @@ return (
         onChange={handleSavePassword}
         checked={savePassword ? true: false }
         label="Guardar Password" />
-          
-        
       
       <Button
         type="submit"

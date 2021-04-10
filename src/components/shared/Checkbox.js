@@ -1,4 +1,7 @@
+import pT from 'prop-types';
+
 import './Checkbox.css';
+
 
 const Checkbox = ({label, ...props}) => {
     return(
@@ -8,5 +11,9 @@ const Checkbox = ({label, ...props}) => {
       </div>
     );
 };
+
+Checkbox.propTypes = {
+ label: pT.string.isRequired,
+}
 
 export default Checkbox;

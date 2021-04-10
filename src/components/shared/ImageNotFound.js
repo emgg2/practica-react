@@ -10,3 +10,7 @@ ImageNotFound.propTypes = {
     name: pT.string,
 }
 export default ImageNotFound;
+
+ImageNotFound.defaultProps = {    
+    isRequired: false
+  }

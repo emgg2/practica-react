@@ -1,5 +1,15 @@
-.notFound {
-    text-align: center;
-    font-size: 48;
-    font-weight: bold;
-}
+.imageNF {
+    height: 100% ;
+ }
+ 
+ .noTFound {
+     text-align: center;
+     font-weight: bold;     
+ }
+ 
+ .containerNF{     
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-top: 20px;
+ }

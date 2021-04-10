@@ -1,4 +1,4 @@
-import T from 'prop-types';
+import pT from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ButtonMenu } from '../../shared';
 import { logout } from '../../../api/auth';
@@ -22,9 +22,9 @@ const AuthButton = ({ className, isLogged, onLogout }) => {
 };
 
 AuthButton.propTypes = {
-  className: T.string,
-  isLogged: T.bool,
-  onLogout: T.func.isRequired,
+  className: pT.string,
+  isLogged: pT.bool,
+  onLogout: pT.func.isRequired,
 };
 
 AuthButton.defaultProps = {
@@ -48,7 +48,6 @@ const connectedAuthButton = (props) => {
    </AuthContextConsumer>
    );
 }
-
 
 
 export default connectedAuthButton;

@@ -1,15 +1,12 @@
 import React from 'react';
-
-import './NewProductPage.css';
-
+import pT from 'prop-types';
 import Input from '../../shared/Input';
 import Button from '../../shared/Button';
 import File from '../../shared/File';
 import SelectSale from '../../shared/SelectSale';
 import MultiSelectTags from '../../shared/MultiSelectTags';
 
-
-
+import './NewProductPage.css';
 
 const NewProductPage = ({ onSubmit }) => {
 	
@@ -126,6 +123,10 @@ const NewProductPage = ({ onSubmit }) => {
 
 	);
 
+}
+
+NewProductPage.propTypes = {
+    onSubmit: pT.func.isRequired,
 }
 
 export default NewProductPage;

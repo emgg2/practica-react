@@ -1,13 +1,11 @@
 import React from 'react';
-import './NewProductPage.css';
 import Layout from '../../layout/Layout';
-
+import useError from '../../../hooks/useError';
+import useIsLoading from '../../../hooks/useError';
 import NewProductPageForm from './NewProductPageForm'
 import { createProduct } from '../../../api/products';
 
-
-import useError from '../../../hooks/useError';
-import useIsLoading from '../../../hooks/useError';
+import './NewProductPage.css';
 
 const NewProductPage = ({  history }) => {
     const [error, handleError] = useError(false);

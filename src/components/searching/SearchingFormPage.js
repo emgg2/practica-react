@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Input from '../shared/Input';
 import MultiSelectTags from '../shared/MultiSelectTags';
 import SelectSale from '../shared/SelectSale';
-import { getProducts } from '../../api/products';
-import './SearchingPage.css';
 import pT from 'prop-types';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import RangeSelector from '../shared/RangeSelector';
 
-
-
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import './SearchingPage.css';
 
 
 const SearchingFormPage = ({onChange, items}) => {    
@@ -24,14 +21,12 @@ const SearchingFormPage = ({onChange, items}) => {
     const handleRange=event=>setSearchRange(event.target.value);   
     const handleChangeMultiSelect = event => {                
         let tags = [];
-
         event.forEach(element => {
             tags.push(element.value);                       
         });              
     
         setSearchTags(tags);        
-    }
-    
+    }    
 
     function filterByAll(obj) {
         let nameFound = true;
@@ -114,8 +109,9 @@ const SearchingFormPage = ({onChange, items}) => {
     );
 };
 
-// SearchingFormPage.propTypes {
-
-// }
+SearchingFormPage.propTypes = {
+    onChange: pT.func.isRequired,
+    items: pT.array.isRequired
+}
 
 export default SearchingFormPage;

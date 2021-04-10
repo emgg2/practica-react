@@ -1,10 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
+import ButtonMenu from '../shared/ButtonMenu';
+import AuthButton from '../auth/AuthButton/';
+import pT from 'prop-types';
 import {Link} from 'react-router-dom';
 import './Header.css';
-import ButtonMenu from '../shared/ButtonMenu';
-import {ReactComponent as Icon } from '../../assets/twitter.svg';
-import AuthButton from '../auth/AuthButton/';
+
 
 const Header = ({ className, ...props }) => {
      
@@ -30,5 +31,9 @@ const Header = ({ className, ...props }) => {
     );
 
 };
+
+Header.propTypes = {
+    className: pT.string,
+}
 
 export default Header;

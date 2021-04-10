@@ -10,17 +10,11 @@ import Spinner from '../../shared/Spinner';
 import Advert from '../../shared/Advert';
 
 import useError from '../../../hooks/useError';
-
-//TODO: REHACER ERROR Y SPINNER PARA USAR CUSTOM HOOK, O SINO EN CADA COMPONENTE POR SEPARADO NO ES OBLIGATORIO
+import useIsLoading from '../../../hooks/useIsLoading';
 
 function LoginPage({ onLogin, history, location }) {
-  const [isLoading, setIsLoading] = React.useState(false); 
-  const [error, handleError] = useError(null);
-
-  
-  
-  const handleLoading = (value) => setIsLoading(value);
-  
+  const [isLoading, handleIsLoading] = useIsLoading(false);
+  const [error, handleError] = useError(null);    
   const isLogged = React.useRef(false);
   
   React.useEffect(()=>{
@@ -31,19 +25,17 @@ function LoginPage({ onLogin, history, location }) {
     }
   });
 
-
   const handleSubmit = async (credentials, savePassword)=> {
-    
     try
     {
-      handleLoading(true);
+      handleIsLoading(true);   
       await login(credentials, savePassword);       
       isLogged.current = true;             
     }catch (error) { 
         handleError(error.message);      
     } finally
     {
-        handleLoading(false);
+      handleIsLoading(false); 
     }   
   }
     
