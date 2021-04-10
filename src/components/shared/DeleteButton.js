@@ -4,7 +4,6 @@ import Button from "./Button";
 import useError from '../../hooks/useError';
 import useIsLoading from '../../hooks/useIsLoading';
 
-
 const DeleteButton = ({productId, history}) => {
 
     const [isDelete, setIsDelete] = React.useState(false);

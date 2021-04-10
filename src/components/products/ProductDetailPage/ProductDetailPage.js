@@ -43,7 +43,7 @@ const ProductDetailPage = ({match, ...props}) => {
             error={error}
             isLoading={isLoading}
             {...props}>  
-            {product ? <ProductDetail product={product} {...props} />: '' }           
+            {product ? <ProductDetail key={match.params.productId} product={product} {...props} />: '' }           
             
         </Layout>     
     );

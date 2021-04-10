@@ -2,10 +2,10 @@ import React from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { getTags } from '../../api/products';
+import pT from 'prop-types';
 
 
-
-const MultiSelectTags = ({onChange, label}) => {
+const MultiSelectTags = ({onChange, label, isRequired}) => {
 
     const [tagsOptions, setTagsOptions] = React.useState({
         value: '',
@@ -34,9 +34,6 @@ const MultiSelectTags = ({onChange, label}) => {
            
         }, []);
 
-   
-    
-
     const animatedComponents = makeAnimated();
 
     return (
@@ -49,9 +46,19 @@ const MultiSelectTags = ({onChange, label}) => {
             name='tags'
             onChange={onChange}
             options={tagsOptions}
+            required={isRequired?true:false}
         />
         </label>
     );
 };
 
+MultiSelectTags.propTypes = {
+    onChange: pT.func,
+    label: pT.string.isRequired,   
+  }
+  
+  MultiSelectTags.defaultProps = {    
+    isRequired: false
+  }
+  
 export default MultiSelectTags;

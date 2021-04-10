@@ -3,7 +3,7 @@
   margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+
 
   }
   
@@ -21,3 +21,10 @@ img {
     text-align: left;
 }
   
+.link {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none i !important;
+}

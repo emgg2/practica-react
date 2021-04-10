@@ -36,7 +36,7 @@ const NewProductPage = ({  history }) => {
 			formData.append('price', productData.price);
 			formData.append('sale', productData.sale);
 			formData.append('tags', productData.tags);
-			formData.append('photo', productData.photo);
+            if(productData.photo !== "") formData.append('photo', productData.photo);
 			return formData;
 		}
 
@@ -45,6 +45,7 @@ const NewProductPage = ({  history }) => {
                 onSubmit={handleSubmit} 
                 error={error} 
                 isLoading={isLoading}
+                title='Nuevo producto'
             >                
                 <NewProductPageForm onSubmit={handleSubmit}></NewProductPageForm>
             </Layout>         

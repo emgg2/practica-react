@@ -95,12 +95,12 @@ img {
 
 .productData{
     padding:50px;
+    width: 100%;
 }
 
-.productName{
+.productNameDetail{
     font-weight: bold;
-    font-size: 1em;
-    color: rgb(29, 161, 242);
+    font-size: 1em;    
     font-size: 3em;
 }
 

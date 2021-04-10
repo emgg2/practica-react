@@ -9,8 +9,8 @@ const ProductItem = ({product}) => {
     return (
         <div className = "boxProduct" key={product.id}>                   
         <img src={`${process.env.REACT_APP_API_BASE_URL}${product.photo}`} alt={product.name}></img>
-        <div className={scopedStyles.boxDetail}>
-            <div className="productDetail">
+        <div className={scopedStyles.boxDetail} >
+            <div className="productDetail" >
                 <p className="productPrice"><b>{product.price}€</b></p>
                 <p className="productName">{product.name}</p>
             </div>

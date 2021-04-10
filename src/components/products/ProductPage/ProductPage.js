@@ -42,7 +42,10 @@ const ProductPage = ({ ...props }) => {
     const handelIsSearching = () => setIsSearching(!isSearching);
     
     return (
-        <Layout title="Product List" { ...props } >
+        <Layout 
+            title="Productos disponibles"
+            { ...props } 
+        >
                 <DropdownHeader
                     onClick = {handelIsSearching}
                     title = "Búsqueda Avanzada" 

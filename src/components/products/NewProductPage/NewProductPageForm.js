@@ -21,7 +21,7 @@ const NewProductPage = ({ onSubmit }) => {
 			photo: ''
 	});
 
-	const handleSubmit = event => {
+	const handleSubmit = event => {		
 			event.preventDefault();
 			onSubmit(productData);
 	}
@@ -64,13 +64,13 @@ const NewProductPage = ({ onSubmit }) => {
 
 	const handleError = ({error}) => alert(error);
 
-	const {name, price} = productData;
+	const {name, price, sale, tags} = productData;
 
 	return (
 
 		<div className="columns">
 			<div className="column is-two-thirds">
-				<h1 className="title">New Product</h1>
+				
 				<form onSubmit={handleSubmit}>
 
 					<Input
@@ -80,6 +80,7 @@ const NewProductPage = ({ onSubmit }) => {
 						className="loginForm-field"
 						value={name}
 						onChange={handleChange}
+						isRequired
 					/>
 
 					<Input
@@ -88,16 +89,20 @@ const NewProductPage = ({ onSubmit }) => {
 						label="Precio"						
 						value={price}
 						onChange={handleChange}
+						isRequired
+						pattern="\d*"
 					/>
 
 					<SelectSale                 
 						onChange={handleChangeSelect}
 						label="Estado"
+						isRequired
 					/>
 
 					<MultiSelectTags
 						onChange={handleChangeMultiSelect}
 						label="Tags"
+						isRequired
 					/>             
 
 					<File 
@@ -110,7 +115,7 @@ const NewProductPage = ({ onSubmit }) => {
 						type="submit"
 						className="loginForm-submit"
 						variant="primary"
-						disabled={!name || !price}
+						disabled={!name || !price || !sale || !tags}
 					>
 						Publicar
 					</Button>
