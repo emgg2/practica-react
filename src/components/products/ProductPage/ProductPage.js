@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getProducts } from '../../../api/products'
 import Layout from '../../layout/Layout';
-
 import './ProductPage.css';
-
-import Spinner from '../../shared/Spinner';
-import ProductList from './ProductList';
-
-
 import pT from 'prop-types';
-import SearchingFormPage from '../../searching/SearchingFormPage';
-import { Button } from '../../shared';
-import DropdownHeader from '../../shared/DropdownHeader';
+import ProductsAvailable from '../ProductsAvailable/ProductsAvailable';
+import NoProductAvailable from '../NoProductAvailable/NoProductAvailable';
 
 
 const ProductPage = ({ ...props }) => {
@@ -39,26 +32,26 @@ const ProductPage = ({ ...props }) => {
     },[]);
 
     const handleFilteredProducts = (products) => setFilteredProducts(products);
-    const handelIsSearching = () => setIsSearching(!isSearching);
+    const handleIsSearching = () => setIsSearching(!isSearching);
     
-    return (
+   return (
         <Layout 
-            title="Productos disponibles"
+            title={(products.length>0 ? 'Productos Disponibles' : '')}
             { ...props } 
         >
-                <DropdownHeader
-                    onClick = {handelIsSearching}
-                    title = "Búsqueda Avanzada" 
-                    />       
-            {isSearching ? <SearchingFormPage 
-                items={products}
-                onChange={handleFilteredProducts}
-            />:''}
-             
-            <ProductList
-                products={filteredProducts} 
+           {products.length>0 
+           ? 
+            <ProductsAvailable
+                products={products}
+                handleFilteredProducts={handleFilteredProducts}
+                handleIsSearching={handleIsSearching} 
+                filteredProducts={filteredProducts}
+                isSearching={isSearching}
                 {...props}
-            />           
+        />
+        
+         
+           : <NoProductAvailable />}
         </Layout>
     );
 }
