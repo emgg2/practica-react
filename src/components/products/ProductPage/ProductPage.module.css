@@ -9,15 +9,15 @@
   
 
 img {
-    width: 100%;
+    width: 260px;
     height: 200px;
     min-width: 120px;
     min-height: 140px;
-    background-color: lightgrey;
+    
   }
 
 .boxDetail {
-    background-color: lightgray;
+    
     text-align: left;
 }
   

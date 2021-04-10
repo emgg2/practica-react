@@ -1,10 +1,10 @@
 import scopedStyles from './ProductPage.module.css';
+import './ProductPage.css';
+
 
 const ProductItem = ({product}) => {
     
     const tags = product.tags.map(tag => <p className="tag">{tag}</p>);
-    
-
 
     return (
         <div className = "boxProduct" key={product.id}>                   

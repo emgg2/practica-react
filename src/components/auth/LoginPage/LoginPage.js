@@ -40,7 +40,6 @@ function LoginPage({ onLogin, history, location }) {
       await login(credentials, savePassword);       
       isLogged.current = true;             
     }catch (error) { 
-      debugger;
         handleError(error.message);      
     } finally
     {
@@ -48,13 +47,15 @@ function LoginPage({ onLogin, history, location }) {
     }   
   }
     
-  return (       
+  return (   
+      <div className="contentLogin">
         <div className="loginPage">
            {isLoading && <Spinner />}            
           <h1 className="loginPage-title">Nodepop Log in</h1> 
           { error && <Advert  message={error} /> }             
           <LoginForm onSubmit={handleSubmit} isLoading={isLoading}/>        
         </div>
+        </div>    
       );
 }
 
