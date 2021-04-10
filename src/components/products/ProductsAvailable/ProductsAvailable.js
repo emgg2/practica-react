@@ -4,6 +4,7 @@ import pT from 'prop-types';
 import ProductList from '../ProductPage/ProductList';
 import SearchingFormPage from '../../searching/SearchingFormPage';
 import DropdownHeader from '../../shared/DropdownHeader';
+import NoResultsFound from '../../searching/NoResultsFound';
 
 const ProductsAvailable = ({
     products, 
@@ -12,7 +13,6 @@ const ProductsAvailable = ({
     filteredProducts, 
     isSearching,  
     ...props }) => {
-    
     
    return (        
         <React.Fragment>      
@@ -23,11 +23,16 @@ const ProductsAvailable = ({
             {isSearching ? <SearchingFormPage 
                 items={products}
                 onChange={handleFilteredProducts}
-            />:''}             
-            <ProductList
+            />:''}  
+            {filteredProducts.length > 0
+            ? <ProductList
                 products={filteredProducts} 
                 {...props}
-            />          
+                />          
+            : <NoResultsFound/>    
+
+            }           
+            
         </React.Fragment>      
     );
 };
