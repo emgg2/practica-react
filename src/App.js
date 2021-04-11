@@ -1,10 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { ProductPage } from './components/products';
-import Button from './components/shared/Button';
 import { LoginPage, PrivateRoute } from './components/auth/';
-import { BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom';
+import { Switch, Route, Redirect} from 'react-router-dom';
 import { NotFound } from './components/shared';
 import NewProductPage from './components/products/NewProductPage/NewProductPage';
 import ProductDetailPage from './components/products/ProductDetailPage/ProductDetailPage';
