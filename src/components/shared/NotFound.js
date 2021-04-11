@@ -1,15 +1,16 @@
 import React from 'react';
 import './NotFound.css';
 
-function NotFound(){
-    return(     
-    <div className="containerNF">
-        <div className="notFound">
-            <img src='/img/sad.jpg' className="imageNF"></img>
-            <p>404 - PAGINA NO ENCONTRADA</p>
-           
+function NotFound({message}){
+    return( 
+        <div className="containerNPA">
+            <div className="noProductAvailable">
+                <img src='/img/sad.jpg' className="imageNPA"></img>
+                <p >{message}</p>
+               
+            </div>
         </div>
-    </div>
+        
     );
 }
 export default NotFound;

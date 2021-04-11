@@ -112,7 +112,7 @@ const NewProductPage = ({ onSubmit }) => {
 						type="submit"
 						className="loginForm-submit"
 						variant="primary"
-						disabled={!name || !price || !sale || !tags}
+						disabled={!name || !price || sale === "" || !tags}
 					>
 						Publicar
 					</Button>

@@ -1,15 +1,17 @@
-.imageNF {
-    height: 100% ;
+.imageNPA {
+    height: 200px;
+    width: 300px;
+
  }
  
- .noTFound {
+ .noProductAvailable {
+     margin-top:20px;
      text-align: center;
-     font-weight: bold;     
+     font-weight: bold;
  }
  
- .containerNF{     
+ .containerNPA{
      display: flex;
      justify-content: center;
      align-items: center;
-     margin-top: 20px;
  }

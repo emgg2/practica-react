@@ -1,10 +1,11 @@
 import React from 'react';
-import '../ProductPage/ProductPage.css';
 import pT from 'prop-types';
 import ProductList from '../ProductPage/ProductList';
 import SearchingFormPage from '../../searching/SearchingFormPage';
 import DropdownHeader from '../../shared/DropdownHeader';
-import NoResultsFound from '../../searching/NoResultsFound';
+import NotFound from '../../shared/NotFound';
+
+import '../ProductPage/ProductPage.css';
 
 const ProductsAvailable = ({
     products, 
@@ -29,7 +30,9 @@ const ProductsAvailable = ({
                 products={filteredProducts} 
                 {...props}
                 />          
-            : <NoResultsFound/>    
+            : <NotFound 
+                message="NO SE HAN ENCONTRADO RESULTADO CON LA BUSQUEDA" />
+            
 
             }           
             
