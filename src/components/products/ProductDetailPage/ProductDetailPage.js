@@ -3,8 +3,6 @@ import './ProductDetailPage.css';
 import Layout from '../../layout/Layout';
 import { getProductById } from '../../../api/products';
 import { Redirect } from 'react-router';
-import DeleteButton from '../../shared/DeleteButton';
-
 import useError from '../../../hooks/useError';
 import useIsLoading from '../../../hooks/useIsLoading';
 import ProductDetail from './productDetail';

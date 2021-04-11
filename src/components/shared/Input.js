@@ -14,7 +14,7 @@ function Input({ className, label, autoFocus, isRequired,  ...props }) {
     }
     
 
-  }, [])
+  }, [autoFocus])
 
   return (
     <div

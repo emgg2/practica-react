@@ -29,7 +29,7 @@ const NewProductPage = ({  history }) => {
         }		
       
 		const getFormData = (productData) => {
-			let formData = new FormData;
+			let formData = new FormData();
 			formData.append('name', productData.name);
 			formData.append('price', productData.price);
 			formData.append('sale', productData.sale);

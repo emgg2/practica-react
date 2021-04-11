@@ -1,6 +1,6 @@
 import { Button } from '../../shared';
 import './NoProductAvailable.css';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 const NoProductAvailable = () => {
@@ -8,7 +8,7 @@ const NoProductAvailable = () => {
     return( 
         <div className="containerNPA">
             <div className="noProductAvailable">
-                <img src='/img/sad.jpg' className="imageNPA"></img>
+                <img src='/img/sad.jpg' className="imageNPA" alt="sad face"></img>
                 <p >NO HAY PRODUCTOS DISPONIBLES</p>
                 <Button               
                     

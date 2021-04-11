@@ -51,8 +51,7 @@ const NewProductPage = ({ onSubmit }) => {
 					[nameEle]: tags,
 			}))
 	}
-	const handleFile = e => {
-		console.log(e);
+	const handleFile = e => {		
 			setProductData(oldProductData => ({
 			...oldProductData, 
 			['photo']: e
