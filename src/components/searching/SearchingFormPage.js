@@ -52,15 +52,16 @@ const SearchingFormPage = ({onChange, items}) => {
     }
 
     
-    function initializeTags(values)
-    {
-        const valuesArray = values.split(",");
-        let tags = [];
-        valuesArray.forEach(element => {
-            tags.push(element);                       
-        });  
-        setSearchTags(tags);      
-    }
+    // function initializeTags(values)
+    // {
+    //     const valuesArray = values.split(",");
+    //     let tags = [];
+    //     valuesArray.forEach(element => {
+    //         tags.push(element);                       
+    //     });  
+    //     setSearchTags(tags);      
+    //     //no se cómo hacer que se actualice el select
+    // }
 
     function setLocalStorage(key,value)
     {
@@ -102,8 +103,9 @@ const SearchingFormPage = ({onChange, items}) => {
     }
     useEffect(()=> {
         setSearchName(getLocalStorage('searchName'));                
-        setSearchSale(getLocalStorage('searchSale'));        
-        initializeTags(getLocalStorage('searchTags'));
+        //setSearchSale(getLocalStorage('searchSale'));        
+        //initializeTags(getLocalStorage('searchTags'));
+        //no sé como hacer para que los select muestren los datos que vienen en el localstorage
         setSearchRange(getLocalStorage('searchPrice'));
     }, [])
  
