@@ -27,7 +27,7 @@ const ProductDetailPage = ({match, ...props}) => {
         executeGetProduct();
 
         return() => {
-            console.log('cleanup')
+            console.log('cleanup44')
         }
 
     }, [match.params.productId]);
