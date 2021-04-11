@@ -5,10 +5,10 @@ import ImageNotFound from '../../shared/ImageNotFound';
 
 const ProductItem = ({product}) => {
     
-    const tags = product.tags.map(tag => <p className="tag">{tag}</p>);
+    const tags = product.tags.map(tag => <p className="tag" key="product.id">{tag}</p>);
 
     return (
-        <div className = "boxProduct" key={product.id}>  
+        <div className = "boxProduct" >  
         {product.photo
             ? <img src={`${process.env.REACT_APP_API_BASE_URL}${product.photo}`} alt={product.name} className="imgSmall"></img>
             : <ImageNotFound name={product.name}/>

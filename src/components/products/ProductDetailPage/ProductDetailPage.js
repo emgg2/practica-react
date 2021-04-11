@@ -7,7 +7,7 @@ import useError from '../../../hooks/useError';
 import useIsLoading from '../../../hooks/useIsLoading';
 import ProductDetail from './productDetail';
 
-const ProductDetailPage = ({match, ...props}) => {
+const ProductDetailPage = ({match,  ...props}) => {
     const [product, setProduct] = useState(null);
     const [error, handleError] = useError(false);
     const [isLoading, handleIsLoading] = useIsLoading(false);       
@@ -27,7 +27,7 @@ const ProductDetailPage = ({match, ...props}) => {
         executeGetProduct();
 
         return() => {
-            console.log('cleanup44')
+            console.log('cleanup')
         }
 
     }, [match.params.productId]);
@@ -37,11 +37,15 @@ const ProductDetailPage = ({match, ...props}) => {
         return <Redirect to='/404' />
     }
     return ( 
-        <Layout title="Product Detail"
+        <Layout title="Detalle del producto"
             error={error}
             isLoading={isLoading}
             {...props}>  
-            {product ? <ProductDetail key={match.params.productId} product={product} {...props} />: '' }           
+            {product 
+            ? <ProductDetail 
+                product={product}                
+                {...props} />
+            : '' }           
             
         </Layout>     
     );

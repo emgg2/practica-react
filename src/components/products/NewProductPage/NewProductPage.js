@@ -11,6 +11,8 @@ const NewProductPage = ({  history }) => {
     const [error, handleError] = useError(false);
     const [isLoading, handleIsLoading] = useIsLoading(false);
    
+
+
         const handleSubmit = async productData => {
             try 
             {
@@ -21,9 +23,6 @@ const NewProductPage = ({  history }) => {
 
             }catch (error) {
                 handleError(error.message);      
-
-            }finally{
-                handleIsLoading(false);
 
             }              
         }		

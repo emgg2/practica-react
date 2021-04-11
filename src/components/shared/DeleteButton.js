@@ -1,8 +1,9 @@
 import React  from "react";
-import {deleteProduct} from '../../api/products';
+import { deleteProduct } from '../../api/products';
 import Button from "./Button";
 import useError from '../../hooks/useError';
 import useIsLoading from '../../hooks/useIsLoading';
+import pT from 'prop-types';
 
 const DeleteButton = ({productId, history}) => {
 
@@ -12,7 +13,7 @@ const DeleteButton = ({productId, history}) => {
 
     React.useEffect(()=>{
         async function setDeleteProduct () {
-            try {          
+            try {     
                handleIsLoading(true);                  
                if(isDelete === true){
                     await deleteProduct(productId);                             
@@ -50,5 +51,10 @@ const DeleteButton = ({productId, history}) => {
          
     )
 };
+
+DeleteButton.propTypes = {
+    productId: pT.string.isRequired,
+
+}
 
 export default DeleteButton;

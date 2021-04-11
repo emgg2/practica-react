@@ -14,16 +14,13 @@ function App({isInitiallyLogged}) {
 
   const [isLogged, setIsLogged] = React.useState(isInitiallyLogged);
   
-  const ref = React.useRef(null);
   const handleOnLogin = () => setIsLogged(true);
   const handleOnLogout = () => {
     setIsLogged(false);
     logout();    
   }
 
-  React.useEffect(() => {
-	console.log(ref.current);
-  }, []);
+
 
   const authValue = {
     isLogged,
@@ -38,7 +35,7 @@ function App({isInitiallyLogged}) {
     <AuthContextProvider value={authValue}>
       <Switch>        
         <PrivateRoute path="/product/:productId">
-			{routeProps => <ProductDetailPage ref={ref} {...routeProps} />}	
+			{routeProps => <ProductDetailPage {...routeProps} />}	
 		</PrivateRoute> 
         <PrivateRoute path="/product" component={NewProductPage} />       	
         <Route path="/login" component={LoginPage} />            	
